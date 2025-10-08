@@ -1,0 +1,75 @@
+MariaDB [gym_management]> SELECT 
+    ->     staff.user_id,
+    ->     CONCAT(user.first_name, ' ', user.last_name) AS full_name,
+    ->     staff.position,
+    ->     staff.hire_date,
+    ->     staff.salary,
+    ->     gym.name AS gym_name
+    -> FROM STAFF staff
+    -> JOIN USER user ON staff.user_id = user.user_id  
+    -> JOIN GYM gym ON staff.gym_id = gym.gym_id       
+    -> ORDER BY gym.name, staff.position, full_name;
++---------+------------------+--------------+------------+---------+---------------+
+| user_id | full_name        | position     | hire_date  | salary  | gym_name      |
++---------+------------------+--------------+------------+---------+---------------+
+|       5 | Renoir Dessendre | Trainer      | 2022-06-10 | 3500.00 | Ex60 gym      |
+|       2 | Jack Sonn        | Manager      | 2020-01-10 | 5000.00 | GetBuff Gym   |
+|       1 | Siwoo Lee        | Trainer      | 2021-05-15 | 3200.00 | GetBuff Gym   |
+|       4 | Maelle Verso     | Manager      | 2019-11-20 | 5200.00 | Muscle hustle |
+|       3 | Alexander Dawn   | Receptionist | 2022-03-01 | 2800.00 | Muscle hustle |
++---------+------------------+--------------+------------+---------+---------------+
+5 rows in set (0.001 sec)
+
+MariaDB [gym_management]> 
+MariaDB [gym_management]> 
+MariaDB [gym_management]> 
+MariaDB [gym_management]> 
+MariaDB [gym_management]> -- Query 2: number of staff per position per gym
+MariaDB [gym_management]> SELECT 
+    ->     gym.name AS gym_name,
+    ->     staff.position,
+    ->     COUNT(staff.user_id) AS total_staff
+    -> FROM STAFF staff
+    -> JOIN GYM gym ON staff.gym_id = gym.gym_id
+    -> GROUP BY gym.gym_id, staff.position
+    -> HAVING COUNT(staff.user_id) > 0
+    -> ORDER BY gym.name, staff.position;
++---------------+--------------+-------------+
+| gym_name      | position     | total_staff |
++---------------+--------------+-------------+
+| Ex60 gym      | Trainer      |           1 |
+| GetBuff Gym   | Manager      |           1 |
+| GetBuff Gym   | Trainer      |           1 |
+| Muscle hustle | Manager      |           1 |
+| Muscle hustle | Receptionist |           1 |
++---------------+--------------+-------------+
+5 rows in set (0.000 sec)
+
+MariaDB [gym_management]> 
+MariaDB [gym_management]> 
+MariaDB [gym_management]> 
+MariaDB [gym_management]> -- Query 3: Find manager(s) with the highest salary per gym
+MariaDB [gym_management]> SELECT 
+    ->     gym.name AS gym_name,
+    ->     CONCAT(user.first_name, ' ', user.last_name) AS manager_name,
+    ->     staff.salary
+    -> FROM STAFF staff
+    -> JOIN USER user ON staff.user_id = user.user_id
+    -> JOIN GYM gym ON staff.gym_id = gym.gym_id
+    -> WHERE staff.position = 'Manager'
+    ->   AND staff.salary = (
+    ->       SELECT MAX(inner_staff.salary)
+    ->       FROM STAFF inner_staff
+    ->       WHERE inner_staff.gym_id = staff.gym_id
+    ->         AND inner_staff.position = 'Manager'
+    ->   )
+    -> ORDER BY gym.name;
++---------------+--------------+---------+
+| gym_name      | manager_name | salary  |
++---------------+--------------+---------+
+| GetBuff Gym   | Jack Sonn    | 5000.00 |
+| Muscle hustle | Maelle Verso | 5200.00 |
++---------------+--------------+---------+
+2 rows in set (0.000 sec)
+
+MariaDB [gym_management]> notee;
