@@ -1,0 +1,31 @@
+MariaDB [db_aharslan]> SOURCE sample_data_exercise.sql;
+ERROR: Failed to open file 'sample_data_exercise.sql', error: 2
+MariaDB [db_aharslan]> SOURCE exercise_hierarchy_queries.sql;
+ERROR: Failed to open file 'exercise_hierarchy_queries.sql', error: 2
+MariaDB [db_aharslan]> NOTEE;
+MariaDB [db_aharslan]> SOURCE exercise_hierarchy_queries.sql;
++-------------+---------------+----------+--------------+
+| exercise_id | name          | sessions | unique_users |
++-------------+---------------+----------+--------------+
+|           1 | Treadmill Run |        6 |            3 |
+|           2 | HIIT Sprint   |        1 |            1 |
++-------------+---------------+----------+--------------+
+2 rows in set (0.000 sec)
+
++--------------+--------+-------------+-------------+--------------+
+| iso_yearweek | gender | exercise_id | name        | total_volume |
++--------------+--------+-------------+-------------+--------------+
+|       202539 | Female |           4 | Bench Press |      1920.00 |
+|       202536 | Female |           3 | Back Squat  |      1800.00 |
+|       202533 | Male   |           3 | Back Squat  |      2500.00 |
++--------------+--------+-------------+-------------+--------------+
+3 rows in set (0.000 sec)
+
++---------+-----------+-------------+-------------------+
+| user_id | user_name | hi_sessions | last_session_date |
++---------+-----------+-------------+-------------------+
+|       1 | Alex One  |           4 | 2025-10-01        |
++---------+-----------+-------------+-------------------+
+1 row in set (0.000 sec)
+
+MariaDB [db_aharslan]> NOTEE;

@@ -18,6 +18,9 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 ├── HW3_sample_data_user.sql           # Assignment 3: User hierarchy sample data (Aleksandr)
 ├── HW3_user_hierarchy_queries.sql     # Assignment 3: User hierarchy queries (Aleksandr)
 ├── HW3_query_log_user.txt            # Assignment 3: User query execution log (Aleksandr)
+├── HW3_sample_data_exercise.sql       # Assignment 3: Exercise hierarchy sample data (Arslan)
+├── HW3_exercise_hierarchy_queries.sql # Assignment 3: Exercise hierarchy queries (Arslan)
+├── HW3_query_log_exercise.txt        # Assignment 3: Exercise query execution log (Arslan)
 ├── fittrack_schema.sql                # Assignment 2: Database schema implementation
 ├── FitTrack Pro - ER Diagram.pdf     # Visual ER Diagram
 └── README.md                          # This file
@@ -40,7 +43,7 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 - **Work Division:**
   - **Aleksandr:** User hierarchy (Individual Users, Gym Members, Staff) ✅ **COMPLETED**
   - **Lee:** Staff hierarchy (Trainers, Managers, Receptionists) ✅ **COMPLETED**
-  - **Arslan:** Exercise hierarchy (Cardio, Strength, Flexibility) 
+  - **Arslan:** Exercise hierarchy (Cardio, Strength, Flexibility) ✅ **COMPLETED**
 
 #### Staff Hierarchy (Lee) ✅
 - **Files:** 
@@ -53,6 +56,12 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
   - `HW3_sample_data_user.sql` - Sample data for User hierarchy
   - `HW3_user_hierarchy_queries.sql` - 3 queries for User hierarchy
   - `HW3_query_log_user.txt` - Query execution results and logs
+
+#### Exercise Hierarchy (Arslan) ✅
+- **Files:** 
+  - `HW3_sample_data_exercise.sql` - Sample data for Exercise hierarchy
+  - `HW3_exercise_hierarchy_queries.sql` - 3 queries for Exercise hierarchy
+  - `HW3_query_log_exercise.txt` - Query execution results and logs
 
 ## System Features
 
@@ -77,16 +86,16 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 
 ### Work Distribution
 Based on the 3 ISA hierarchies in our database design:
-- **Aleksandr Zinovev:** User hierarchy implementation and management 
-- **Siwoo Lee:** Staff hierarchy implementation and management 
-- **Arslan Ahmet Berk:** Exercise hierarchy implementation and management 
+- **Aleksandr Zinovev:** User hierarchy implementation and management ✅ **COMPLETED**
+- **Siwoo Lee:** Staff hierarchy implementation and management ✅ **COMPLETED**
+- **Arslan Ahmet Berk:** Exercise hierarchy implementation and management ✅ **COMPLETED** 
 
 ## Contact
 
 For questions about this project, contact any team member:
 - **Aleksandr Zinovev** - User hierarchy lead ✅ **HW3 Complete**
 - **Siwoo Lee** - Staff hierarchy lead ✅ **HW3 Complete**
-- **Arslan Ahmet Berk** - Exercise hierarchy lead - *HW3 Pending*
+- **Arslan Ahmet Berk** - Exercise hierarchy lead ✅ **HW3 Complete**
 
 ---
 
