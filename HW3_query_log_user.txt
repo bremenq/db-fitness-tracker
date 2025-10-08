@@ -1,0 +1,86 @@
+MariaDB [fittrack_pro]> -- Query 1: Show user types and their workout activity
+MariaDB [fittrack_pro]> SELECT 
+    ->     CASE 
+    ->         WHEN iu.user_id IS NOT NULL THEN 'Individual User'
+    ->         WHEN gm.user_id IS NOT NULL THEN 'Gym Member'  
+    ->         WHEN s.user_id IS NOT NULL THEN 'Staff'
+    ->         ELSE 'Other'
+    ->     END AS user_type,
+    ->     COUNT(DISTINCT u.user_id) AS total_users,
+    ->     COUNT(w.workout_id) AS total_workouts,
+    ->     ROUND(AVG(w.calories_burned), 2) AS avg_calories
+    -> FROM user u
+    -> LEFT JOIN individual_user iu ON u.user_id = iu.user_id
+    -> LEFT JOIN gym_member gm ON u.user_id = gm.user_id  
+    -> LEFT JOIN staff s ON u.user_id = s.user_id
+    -> LEFT JOIN workout w ON u.user_id = w.user_id
+    -> GROUP BY user_type
+    -> HAVING total_users > 2
+    -> ORDER BY total_users DESC;
++----------------+-------------+----------------+-------------+
+| user_type      | total_users | total_workouts | avg_calories|
++----------------+-------------+----------------+-------------+
+| Staff          |           7 |              2 |      275.00 |
+| Gym Member     |           5 |              9 |      377.78 |
+| Individual User|           4 |              8 |      343.75 |
++----------------+-------------+----------------+-------------+
+3 rows in set (0.002 sec)
+
+MariaDB [fittrack_pro]> 
+MariaDB [fittrack_pro]> 
+MariaDB [fittrack_pro]> 
+MariaDB [fittrack_pro]> -- Query 2: Find gym members with good progress
+MariaDB [fittrack_pro]> SELECT 
+    ->     g.name AS gym_name,
+    ->     CONCAT(u.first_name, ' ', u.last_name) AS member_name,
+    ->     gm.membership_type,
+    ->     COUNT(pt.tracking_id) AS progress_records,
+    ->     ROUND(AVG(pt.weight), 2) AS avg_weight,
+    ->     ROUND(AVG(pt.body_fat_percentage), 2) AS avg_body_fat
+    -> FROM gym_member gm
+    -> JOIN gym g ON gm.gym_id = g.gym_id
+    -> JOIN user u ON gm.user_id = u.user_id
+    -> JOIN progress_tracking pt ON gm.user_id = pt.user_id
+    -> GROUP BY gm.user_id, g.name, gm.membership_type
+    -> HAVING progress_records >= 2
+    -> ORDER BY gym_name, avg_weight DESC;
++---------------+-------------+-----------------+------------------+------------+-------------+
+| gym_name      | member_name | membership_type | progress_records | avg_weight | avg_body_fat|
++---------------+-------------+-----------------+------------------+------------+-------------+
+| Ex60 gym      | Anna Garcia | Premium         |                3 |      71.83 |       15.37 |
+| GetBuff Gym   | John Smith  | Premium         |                4 |      81.88 |       17.68 |
+| GetBuff Gym   | David Miller| VIP             |                3 |      87.83 |       19.97 |
++---------------+-------------+-----------------+------------------+------------+-------------+
+3 rows in set (0.001 sec)
+
+MariaDB [fittrack_pro]> 
+MariaDB [fittrack_pro]> 
+MariaDB [fittrack_pro]> 
+MariaDB [fittrack_pro]> -- Query 3: Compare workout duration by user type
+MariaDB [fittrack_pro]> SELECT 
+    ->     CASE 
+    ->         WHEN iu.user_id IS NOT NULL THEN 'Individual User'
+    ->         WHEN gm.user_id IS NOT NULL THEN 'Gym Member'  
+    ->         WHEN s.user_id IS NOT NULL THEN 'Staff'
+    ->     END AS user_type,
+    ->     COUNT(w.workout_id) AS total_workouts,
+    ->     ROUND(AVG(w.duration), 2) AS avg_duration,
+    ->     MAX(w.duration) AS max_duration,
+    ->     MIN(w.duration) AS min_duration
+    -> FROM user u
+    -> LEFT JOIN individual_user iu ON u.user_id = iu.user_id
+    -> LEFT JOIN gym_member gm ON u.user_id = gm.user_id  
+    -> LEFT JOIN staff s ON u.user_id = s.user_id
+    -> JOIN workout w ON u.user_id = w.user_id
+    -> GROUP BY user_type
+    -> HAVING avg_duration > 60
+    -> ORDER BY avg_duration DESC;
++----------------+----------------+-------------+--------------+--------------+
+| user_type      | total_workouts | avg_duration| max_duration | min_duration |
++----------------+----------------+-------------+--------------+--------------+
+| Gym Member     |              9 |       81.67 |          120 |           30 |
+| Individual User|              8 |       71.25 |           90 |           30 |
++----------------+----------------+-------------+--------------+--------------+
+2 rows in set (0.001 sec)
+
+MariaDB [fittrack_pro]>
