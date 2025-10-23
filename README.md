@@ -50,6 +50,25 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 │       ├── 404.html                   # Error page
 │       ├── entities/                  # Entity forms (6 forms + feedback)
 │       └── relationships/             # Relationship forms (3 forms + feedback)
+├── fittrack_cgi/                      # Assignment 5: CGI Implementation (Alternative)
+│   ├── cgi-bin/                       # Python CGI scripts (9 total)
+│   │   ├── add_user.cgi              # User insertion script
+│   │   ├── add_gym.cgi               # Gym insertion script
+│   │   ├── add_workout.cgi           # Workout insertion script
+│   │   ├── add_exercise.cgi          # Exercise insertion script
+│   │   ├── add_class.cgi             # Class insertion script
+│   │   ├── add_progress.cgi          # Progress tracking script
+│   │   ├── add_workout_exercise.cgi  # Workout-Exercise link script
+│   │   ├── add_class_booking.cgi     # Class booking script
+│   │   └── add_gym_member.cgi        # Gym member script
+│   ├── forms/                         # HTML forms (9 total)
+│   ├── css/                           # Corporate Design CSS
+│   ├── img/                           # Brand assets
+│   ├── index.html                     # Homepage
+│   ├── maintenance.html               # Data management hub
+│   ├── imprint.html                   # Legal page
+│   ├── README.md                      # CGI implementation documentation
+│   └── QUICK_START.md                 # Quick deployment guide
 ├── fittrack_schema.sql                # Assignment 2: Database schema implementation
 ├── FitTrack Pro - ER Diagram.pdf     # Visual ER Diagram
 └── README.md                          # This file
@@ -120,22 +139,42 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 ✅ **Legal Compliance** - GDPR statement and German jurisdiction disclaimer  
 ✅ **Responsive Design** - Mobile-friendly layout with proper accessibility
 
-### 📋 Assignment 5 - Flask Web Application ✅
-- **Content:** Web frontend to database services with data entry forms
+### 📋 Assignment 5 - Web Application with Database Integration ✅
 - **Team Collaboration:** All members contributing forms
-- **Technology Stack:** Python Flask + MariaDB + Corporate Design CSS
+- **Technology Stack:** Python (Flask + CGI) + MariaDB + Corporate Design CSS
+- **Two Implementations:**
+
+#### Flask Application (`fittrack_app/`)
+- **Technology:** Modern Python Flask framework with SQLAlchemy ORM
+- **Features:** 
+  - Dynamic templates with Jinja2
+  - Session management and error handling
+  - RESTful routing structure
+  - Development server for local testing
 - **Files:**
-  - `fittrack_app/` - Complete Flask web application
-    - `app.py` - Main Flask application with all 9 routes and database logic
-    - `config.py` - Database configuration for MariaDB connection
-    - `requirements.txt` - Python dependencies (Flask, SQLAlchemy, PyMySQL)
-    - `templates/` - Jinja2 templates with Corporate Design integration
-    - `static/` - CSS and images from Assignment 4
+  - `app.py` - Main Flask application with all 9 routes
+  - `config.py` - Database configuration for MariaDB
+  - `requirements.txt` - Python dependencies
+  - `templates/` - Jinja2 templates with Corporate Design
+  - `static/` - CSS and images from Assignment 4
+
+#### CGI Implementation (`fittrack_cgi/`)
+- **Technology:** Python CGI scripts with PyMySQL (no mod_wsgi required)
+- **Features:**
+  - Direct database connection to MariaDB on clabsql server
+  - Works without admin privileges or mod_wsgi
+  - All 9 forms actually insert data into database
+  - Deployable to university server immediately
+- **Files:**
+  - `cgi-bin/` - 9 executable Python CGI scripts
+  - `forms/` - 9 HTML forms pointing to CGI scripts
+  - `README.md` - CGI implementation documentation
+  - `QUICK_START.md` - Deployment guide
 
 #### Work Distribution:
-- **Aleksandr Zinovev:** User forms, Progress Tracking, Workout-Exercise relationships, Flask setup
+- **Aleksandr Zinovev:** User forms, Progress Tracking, Workout-Exercise relationships, Flask setup, CGI implementation
 - **Siwoo Lee:** Gym forms, Class forms, Class booking relationships  
-- **Arslan Ahmet Berk:** Exercise forms, Workout forms, Workout-Exercise relationships
+- **Arslan Ahmet Berk:** Exercise forms, Workout forms, Gym member relationships
 
 ## System Features
 
