@@ -172,7 +172,7 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
   - `QUICK_START.md` - Deployment guide
 
 #### Work Distribution:
-- **Aleksandr Zinovev:** User forms, Progress Tracking, Workout-Exercise relationships, Flask setup, CGI implementation
+- **Aleksandr Zinovev:** User forms, Progress Tracking, Workout-Exercise relationships
 - **Siwoo Lee:** Gym forms, Class forms, Class booking relationships  
 - **Arslan Ahmet Berk:** Exercise forms, Workout forms, Gym member relationships
 
