@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Workout-Exercise Link Feedback - FitTrack Pro{% endblock %}
+
+{% block content %}
+<section class="feedback-section">
+    {% if success %}
+        <div class="success-message">
+            <h1>✅ Success!</h1>
+            <p>Exercise has been successfully linked to the workout.</p>
+            
+            {% if workout_name and exercise_name %}
+                <div class="link-summary">
+                    <h3>🔗 Link Created:</h3>
+                    <p><strong>{{ exercise_name }}</strong> → <strong>{{ workout_name }}</strong></p>
+                    
+                    {% if sets and reps %}
+                        <div class="exercise-details">
+                            <h4>📊 Exercise Details:</h4>
+                            <ul>
+                                {% if sets %}<li><strong>Sets:</strong> {{ sets }}</li>{% endif %}
+                                {% if reps %}<li><strong>Reps:</strong> {{ reps }}</li>{% endif %}
+                                {% if weight %}<li><strong>Weight:</strong> {{ weight }} kg</li>{% endif %}
+                                {% if duration %}<li><strong>Duration:</strong> {{ duration }} minutes</li>{% endif %}
+                                {% if rest_time %}<li><strong>Rest Time:</strong> {{ rest_time }} seconds</li>{% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="error-message">
+            <h1>❌ Error</h1>
+            <p>Failed to link exercise to workout. Please try again.</p>
+            <p class="error-details">{{ error }}</p>
+            
+            <div class="error-help">
+                <h3>Common Issues:</h3>
+                <ul>
+                    <li>Make sure both workout and exercise are selected</li>
+                    <li>Check that sets and reps are positive numbers</li>
+                    <li>Ensure the workout and exercise exist in the database</li>
+                    <li>This exercise may already be linked to this workout</li>
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="feedback-actions">
+        <a href="{{ url_for('add_workout_exercise') }}" class="btn-primary">Link Another Exercise</a>
+        <a href="{{ url_for('maintenance') }}" class="btn-secondary">Back to Data Management</a>
+    </div>
+
+    <div class="next-steps">
+        <h3>🚀 What's Next?</h3>
+        <ul>
+            <li><a href="{{ url_for('add_workout_exercise') }}">Add more exercises to this workout</a></li>
+            <li><a href="{{ url_for('add_workout') }}">Create a new workout</a></li>
+            <li><a href="{{ url_for('add_exercise') }}">Add more exercises to the library</a></li>
+        </ul>
+    </div>
+</section>
+{% endblock %}

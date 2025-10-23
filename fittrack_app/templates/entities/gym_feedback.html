@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gym Feedback</title>
+</head>
+<body>
+    {% if success %}
+        <p>Gym added successfully! Gym ID: {{ gym_id }}</p>
+    {% else %}
+        <p>Error adding gym: {{ error }}</p>
+    {% endif %}
+    <a href="/maintenance">Back to Maintenance</a>
+</body>
+</html>

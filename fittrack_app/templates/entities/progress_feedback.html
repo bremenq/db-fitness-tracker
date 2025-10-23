@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Progress Tracking Feedback - FitTrack Pro{% endblock %}
+
+{% block content %}
+<section class="feedback-section">
+    {% if success %}
+        <div class="success-message">
+            <h1>✅ Success!</h1>
+            <p>Progress tracking record has been added successfully.</p>
+            <p>Generated Tracking ID: <strong>{{ tracking_id }}</strong></p>
+            
+            {% if weight %}
+                <div class="progress-summary">
+                    <h3>📊 Recorded Data:</h3>
+                    <ul>
+                        <li><strong>Date:</strong> {{ date }}</li>
+                        {% if weight %}<li><strong>Weight:</strong> {{ weight }} kg</li>{% endif %}
+                        {% if body_fat_percentage %}<li><strong>Body Fat:</strong> {{ body_fat_percentage }}%</li>{% endif %}
+                        {% if muscle_mass %}<li><strong>Muscle Mass:</strong> {{ muscle_mass }} kg</li>{% endif %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="error-message">
+            <h1>❌ Error</h1>
+            <p>Failed to add progress tracking record. Please try again.</p>
+            <p class="error-details">{{ error }}</p>
+            
+            <div class="error-help">
+                <h3>Common Issues:</h3>
+                <ul>
+                    <li>Make sure you selected a valid user</li>
+                    <li>Check that the date is not in the future</li>
+                    <li>Ensure weight and measurements are realistic values</li>
+                    <li>You may already have a record for this date</li>
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="feedback-actions">
+        <a href="{{ url_for('add_progress') }}" class="btn-primary">Add Another Record</a>
+        <a href="{{ url_for('maintenance') }}" class="btn-secondary">Back to Data Management</a>
+    </div>
+</section>
+{% endblock %}
