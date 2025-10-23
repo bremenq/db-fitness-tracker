@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Add Progress Tracking - FitTrack Pro{% endblock %}
+
+{% block content %}
+<section class="form-section">
+    <h1>Add Progress Tracking</h1>
+    <a href="{{ url_for('maintenance') }}" class="back-link">← Back to Data Management</a>
+
+    <form method="POST" action="{{ url_for('add_progress') }}" class="entity-form">
+        <div class="form-group">
+            <label for="user_id">Select User *</label>
+            <select id="user_id" name="user_id" required>
+                <option value="">-- Select User --</option>
+                {% for user in users %}
+                    <option value="{{ user.user_id }}">{{ user.username }}</option>
+                {% else %}
+                    <option value="">No users available (add users first)</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="date">Date *</label>
+            <input type="date" id="date" name="date" required value="{{ today }}">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="weight">Weight (kg)</label>
+                <input type="number" id="weight" name="weight" step="0.1" min="30" max="300" 
+                       placeholder="e.g., 75.5">
+            </div>
+
+            <div class="form-group">
+                <label for="body_fat_percentage">Body Fat (%)</label>
+                <input type="number" id="body_fat_percentage" name="body_fat_percentage" 
+                       step="0.1" min="0" max="50" placeholder="e.g., 15.2">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="muscle_mass">Muscle Mass (kg)</label>
+            <input type="number" id="muscle_mass" name="muscle_mass" step="0.1" min="0" 
+                   placeholder="e.g., 45.8">
+        </div>
+
+        <div class="form-group">
+            <label for="measurements">Body Measurements</label>
+            <textarea id="measurements" name="measurements" rows="4" 
+                      placeholder="e.g., Chest: 100cm, Waist: 80cm, Arms: 35cm, Thighs: 60cm"></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">Add Progress Record</button>
+            <a href="{{ url_for('maintenance') }}" class="btn-secondary">Cancel</a>
+        </div>
+    </form>
+
+    <div class="form-help">
+        <h3>💡 Tips:</h3>
+        <ul>
+            <li>Record measurements at the same time of day for consistency</li>
+            <li>Use the same scale and measuring tape each time</li>
+            <li>Body fat percentage is optional but helpful for tracking</li>
+            <li>You can add detailed measurements in the text area</li>
+        </ul>
+    </div>
+</section>
+{% endblock %}

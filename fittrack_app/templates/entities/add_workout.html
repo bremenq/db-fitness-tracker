@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Add Workout - FitTrack Pro{% endblock %}
+
+{% block content %}
+<section class="form-section">
+    <h1>Add New Workout</h1>
+    <a href="{{ url_for('maintenance') }}" class="back-link">← Back to Data Management</a>
+
+    <form method="POST" action="{{ url_for('add_workout') }}" class="entity-form">
+        <div class="form-group">
+            <label for="user_id">Select User *</label>
+            <select id="user_id" name="user_id" required>
+                <option value="">-- Select User --</option>
+                {% for user in users %}
+                    <option value="{{ user.user_id }}">{{ user.username }} ({{ user.first_name }} {{ user.last_name }})</option>
+                {% else %}
+                    <option value="">No users available (add users first)</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="workout_name">Workout Name *</label>
+                <input type="text" id="workout_name" name="workout_name" required 
+                       placeholder="e.g., Upper Body Strength, Morning Cardio">
+            </div>
+
+            <div class="form-group">
+                <label for="date">Workout Date *</label>
+                <input type="date" id="date" name="date" required value="{{ today }}">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="start_time">Start Time</label>
+                <input type="time" id="start_time" name="start_time" 
+                       placeholder="e.g., 08:00">
+            </div>
+
+            <div class="form-group">
+                <label for="duration">Duration (minutes)</label>
+                <input type="number" id="duration" name="duration" min="1" max="300" 
+                       placeholder="e.g., 60">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="workout_type">Workout Type</label>
+            <select id="workout_type" name="workout_type">
+                <option value="">-- Select Type --</option>
+                <option value="Strength Training">Strength Training</option>
+                <option value="Cardio">Cardiovascular</option>
+                <option value="HIIT">High Intensity Interval Training</option>
+                <option value="Flexibility">Flexibility & Stretching</option>
+                <option value="Sports">Sports Training</option>
+                <option value="Mixed">Mixed Training</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="notes">Workout Notes</label>
+            <textarea id="notes" name="notes" rows="4" 
+                      placeholder="Any additional notes about this workout session, goals, or observations..."></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">Create Workout</button>
+            <a href="{{ url_for('maintenance') }}" class="btn-secondary">Cancel</a>
+        </div>
+    </form>
+
+    <div class="form-help">
+        <h3>💡 Workout Planning Tips:</h3>
+        <ul>
+            <li><strong>Name:</strong> Use descriptive names that indicate focus (e.g., "Leg Day", "Cardio Blast")</li>
+            <li><strong>Date:</strong> Can be past, present, or future workouts</li>
+            <li><strong>Duration:</strong> Estimate total workout time including rest</li>
+            <li><strong>Type:</strong> Choose the primary focus of the workout</li>
+            <li><strong>Next Step:</strong> After creating, use "Link Exercise to Workout" to add exercises</li>
+        </ul>
+    </div>
+</section>
+{% endblock %}

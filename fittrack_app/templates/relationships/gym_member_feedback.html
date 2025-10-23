@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Gym Member Feedback - FitTrack Pro{% endblock %}
+
+{% block content %}
+<section class="feedback-section">
+    {% if success %}
+        <div class="success-message">
+            <h1>✅ Success!</h1>
+            <p>Gym membership has been created successfully.</p>
+            <p>Membership ID: <strong>{{ membership_id }}</strong></p>
+            
+            {% if user_name and gym_name %}
+                <div class="link-summary">
+                    <h3>🏋️ Membership Details:</h3>
+                    <p><strong>{{ user_name }}</strong> → <strong>{{ gym_name }}</strong></p>
+                    
+                    <div class="exercise-details">
+                        <h4>📊 Membership Information:</h4>
+                        <ul>
+                            {% if membership_type %}<li><strong>Type:</strong> {{ membership_type }}</li>{% endif %}
+                            {% if start_date %}<li><strong>Start Date:</strong> {{ start_date }}</li>{% endif %}
+                            {% if end_date %}<li><strong>End Date:</strong> {{ end_date }}</li>{% else %}<li><strong>Duration:</strong> Unlimited</li>{% endif %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="error-message">
+            <h1>❌ Error</h1>
+            <p>Failed to create gym membership. Please try again.</p>
+            <p class="error-details">{{ error }}</p>
+            
+            <div class="error-help">
+                <h3>Common Issues:</h3>
+                <ul>
+                    <li>Make sure both user and gym are selected</li>
+                    <li>Membership ID must be unique</li>
+                    <li>Check that start date is not in the past</li>
+                    <li>End date must be after start date (if provided)</li>
+                    <li>User might already have an active membership at this gym</li>
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="feedback-actions">
+        <a href="{{ url_for('add_gym_member') }}" class="btn-primary">Add Another Member</a>
+        <a href="{{ url_for('add_class_booking') }}" class="btn-secondary">Book Classes for This Member</a>
+        <a href="{{ url_for('maintenance') }}" class="btn-secondary">Back to Data Management</a>
+    </div>
+
+    <div class="next-steps">
+        <h3>🚀 What's Next?</h3>
+        <ul>
+            <li><a href="{{ url_for('add_class_booking') }}">Book classes for this member</a></li>
+            <li><a href="{{ url_for('add_gym_member') }}">Add more gym members</a></li>
+            <li><a href="{{ url_for('add_user') }}">Register new users</a></li>
+        </ul>
+    </div>
+</section>
+{% endblock %}

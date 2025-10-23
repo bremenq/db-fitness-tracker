@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Book Class for Member - FitTrack Pro{% endblock %}
+
+{% block content %}
+<section class="form-section">
+    <h1>Book Class for Member</h1>
+    <a href="{{ url_for('maintenance') }}" class="back-link">← Back to Data Management</a>
+
+    <form method="POST" action="{{ url_for('add_class_booking') }}" class="entity-form">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="user_id">Select Member *</label>
+                <select id="user_id" name="user_id" required>
+                    <option value="">-- Select Member --</option>
+                    {% for member in members %}
+                        <option value="{{ member.user_id }}">
+                            {{ member.username }} ({{ member.membership_type }})
+                        </option>
+                    {% else %}
+                        <option value="">No members available (add gym members first)</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="class_id">Select Class *</label>
+                <select id="class_id" name="class_id" required>
+                    <option value="">-- Select Class --</option>
+                    {% for class in classes %}
+                        <option value="{{ class.class_id }}">
+                            {{ class.class_name }} - {{ class.schedule_day }} {{ class.schedule_time }}
+                        </option>
+                    {% else %}
+                        <option value="">No classes available (add classes first)</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="booking_date">Booking Date *</label>
+                <input type="date" id="booking_date" name="booking_date" required value="{{ today }}">
+            </div>
+
+            <div class="form-group">
+                <label for="status">Booking Status</label>
+                <select id="status" name="status">
+                    <option value="Confirmed" selected>Confirmed</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Cancelled">Cancelled</option>
+                    <option value="Waitlist">Waitlist</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="notes">Booking Notes</label>
+            <textarea id="notes" name="notes" rows="3" 
+                      placeholder="Any special notes about this booking (dietary restrictions, injuries, etc.)..."></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">Book Class</button>
+            <a href="{{ url_for('maintenance') }}" class="btn-secondary">Cancel</a>
+        </div>
+    </form>
+
+    <div class="form-help">
+        <h3>💡 Booking Guidelines:</h3>
+        <ul>
+            <li><strong>Member:</strong> Only gym members can book classes</li>
+            <li><strong>Class:</strong> Shows class name, day, and time for easy selection</li>
+            <li><strong>Status:</strong> "Confirmed" for immediate booking, "Waitlist" if class is full</li>
+            <li><strong>Date:</strong> When the booking was made (usually today)</li>
+            <li><strong>Capacity:</strong> System will check if class has available spots</li>
+        </ul>
+    </div>
+</section>
+{% endblock %}

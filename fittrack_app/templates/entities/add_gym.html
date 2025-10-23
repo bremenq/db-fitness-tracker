@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Add Gym - FitTrack Pro{% endblock %}
+
+{% block content %}
+<section class="form-section">
+    <h1>Add New Gym</h1>
+    <a href="{{ url_for('maintenance') }}" class="back-link">← Back to Data Management</a>
+
+    <form method="POST" action="{{ url_for('add_gym') }}" class="entity-form">
+        <div class="form-group">
+            <label for="name">Gym Name *</label>
+            <input type="text" id="name" name="name" required 
+                   placeholder="e.g., FitLife Gym, PowerHouse Fitness">
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address *</label>
+            <textarea id="address" name="address" rows="3" required 
+                      placeholder="Full address including street, city, postal code"></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" 
+                       placeholder="e.g., +1-555-123-4567">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" 
+                       placeholder="e.g., info@fitlifegym.com">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="operating_hours">Operating Hours</label>
+            <input type="text" id="operating_hours" name="operating_hours" 
+                   placeholder="e.g., Mon-Fri: 6AM-10PM, Sat-Sun: 8AM-8PM">
+        </div>
+
+        <div class="form-group">
+            <label for="facilities">Facilities</label>
+            <textarea id="facilities" name="facilities" rows="4" 
+                      placeholder="List available facilities: cardio equipment, weight room, pool, sauna, etc."></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">Add Gym</button>
+            <a href="{{ url_for('maintenance') }}" class="btn-secondary">Cancel</a>
+        </div>
+    </form>
+
+    <div class="form-help">
+        <h3>💡 Gym Information Guidelines:</h3>
+        <ul>
+            <li><strong>Name:</strong> Use the official business name of the gym</li>
+            <li><strong>Address:</strong> Include complete address for location services</li>
+            <li><strong>Contact:</strong> Phone and email help members reach the gym</li>
+            <li><strong>Hours:</strong> Clear operating hours help with scheduling</li>
+            <li><strong>Facilities:</strong> List key amenities and equipment available</li>
+        </ul>
+    </div>
+</section>
+{% endblock %}
