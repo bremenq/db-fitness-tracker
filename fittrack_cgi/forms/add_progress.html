@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Progress Tracking - FitTrack Pro</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../img/fittrack-pro-logo.svg" alt="FitTrack Pro" height="40">
+                <h1>FitTrack<span class="highlight">Pro</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#features">Features</a></li>
+                    <li><a href="../maintenance.html">Maintenance</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                    <li><a href="../imprint.html">Imprint</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+
+<section class="form-section">
+    <h1>Add Progress Tracking</h1>
+    <a href="../maintenance.html" class="back-link">← Back to Data Management</a>
+
+    <form method="POST" action="#" class="entity-form">
+        <div class="form-group">
+            <label for="user_id">Select User *</label>
+            <select id="user_id" name="user_id" required>
+                <option value="">-- Select User --</option>
+                <option value="1">demo_user (Demo User)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="date">Date *</label>
+            <input type="date" id="date" name="date" required value="2025-10-23">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="weight">Weight (kg)</label>
+                <input type="number" id="weight" name="weight" step="0.1" min="30" max="300" 
+                       placeholder="e.g., 75.5">
+            </div>
+
+            <div class="form-group">
+                <label for="body_fat_percentage">Body Fat (%)</label>
+                <input type="number" id="body_fat_percentage" name="body_fat_percentage" 
+                       step="0.1" min="0" max="50" placeholder="e.g., 15.2">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="muscle_mass">Muscle Mass (kg)</label>
+            <input type="number" id="muscle_mass" name="muscle_mass" step="0.1" min="0" 
+                   placeholder="e.g., 45.8">
+        </div>
+
+        <div class="form-group">
+            <label for="measurements">Body Measurements</label>
+            <textarea id="measurements" name="measurements" rows="4" 
+                      placeholder="e.g., Chest: 100cm, Waist: 80cm, Arms: 35cm, Thighs: 60cm"></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">Add Progress Record</button>
+            <a href="../maintenance.html" class="btn-secondary">Cancel</a>
+        </div>
+    </form>
+
+    <div class="form-help">
+        <h3>💡 Tips:</h3>
+        <ul>
+            <li>Record measurements at the same time of day for consistency</li>
+            <li>Use the same scale and measuring tape each time</li>
+            <li>Body fat percentage is optional but helpful for tracking</li>
+            <li>You can add detailed measurements in the text area</li>
+        </ul>
+    </div>
+</section>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>FitTrack<span class="highlight">Pro</span></h3>
+                    <p>Database Systems Project 2025</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Development Team</h4>
+                    <p>Aleksandr Zinovev<br>
+                    Siwoo Lee<br>
+                    Arslan Ahmet Berk</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FitTrack Pro. Database Systems Course Project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showDemo(event, entityType) {
+            event.preventDefault();
+            alert('Demo Mode: In the full Flask application, this ' + entityType + ' would be saved to the database.\n\nFor the working version, run the Flask app locally:\ncd fittrack_app && python app.py');
+            return false;
+        }
+    </script>
+</body>
+</html>

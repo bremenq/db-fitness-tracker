@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Gym - FitTrack Pro</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../img/fittrack-pro-logo.svg" alt="FitTrack Pro" height="40">
+                <h1>FitTrack<span class="highlight">Pro</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#features">Features</a></li>
+                    <li><a href="../maintenance.html">Maintenance</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                    <li><a href="../imprint.html">Imprint</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+
+<section class="form-section">
+    <h1>Add New Gym</h1>
+    <a href="../maintenance.html" class="back-link">← Back to Data Management</a>
+
+    <form method="POST" action="#" class="entity-form">
+        <div class="form-group">
+            <label for="name">Gym Name *</label>
+            <input type="text" id="name" name="name" required 
+                   placeholder="e.g., FitLife Gym, PowerHouse Fitness">
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address *</label>
+            <textarea id="address" name="address" rows="3" required 
+                      placeholder="Full address including street, city, postal code"></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" 
+                       placeholder="e.g., +1-555-123-4567">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" 
+                       placeholder="e.g., info@fitlifegym.com">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="operating_hours">Operating Hours</label>
+            <input type="text" id="operating_hours" name="operating_hours" 
+                   placeholder="e.g., Mon-Fri: 6AM-10PM, Sat-Sun: 8AM-8PM">
+        </div>
+
+        <div class="form-group">
+            <label for="facilities">Facilities</label>
+            <textarea id="facilities" name="facilities" rows="4" 
+                      placeholder="List available facilities: cardio equipment, weight room, pool, sauna, etc."></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">Add Gym</button>
+            <a href="../maintenance.html" class="btn-secondary">Cancel</a>
+        </div>
+    </form>
+
+    <div class="form-help">
+        <h3>💡 Gym Information Guidelines:</h3>
+        <ul>
+            <li><strong>Name:</strong> Use the official business name of the gym</li>
+            <li><strong>Address:</strong> Include complete address for location services</li>
+            <li><strong>Contact:</strong> Phone and email help members reach the gym</li>
+            <li><strong>Hours:</strong> Clear operating hours help with scheduling</li>
+            <li><strong>Facilities:</strong> List key amenities and equipment available</li>
+        </ul>
+    </div>
+</section>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>FitTrack<span class="highlight">Pro</span></h3>
+                    <p>Database Systems Project 2025</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Development Team</h4>
+                    <p>Aleksandr Zinovev<br>
+                    Siwoo Lee<br>
+                    Arslan Ahmet Berk</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FitTrack Pro. Database Systems Course Project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showDemo(event, entityType) {
+            event.preventDefault();
+            alert('Demo Mode: In the full Flask application, this ' + entityType + ' would be saved to the database.\n\nFor the working version, run the Flask app locally:\ncd fittrack_app && python app.py');
+            return false;
+        }
+    </script>
+</body>
+</html>
