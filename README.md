@@ -34,6 +34,22 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 │       ├── fittrack-pro-logo.svg     # Brand logo
 │       ├── logo-demo.html            # Logo demonstration
 │       └── color-palette.html        # Color palette visualization
+├── fittrack_app/                      # Assignment 5: Flask Web Application
+│   ├── app.py                         # Main Flask application with all 9 routes
+│   ├── config.py                      # Database configuration
+│   ├── requirements.txt               # Python dependencies
+│   ├── README.md                      # Flask app documentation
+│   ├── static/                        # Static assets
+│   │   ├── css/style.css             # Corporate Design CSS
+│   │   └── img/fittrack-pro-logo.svg # Brand logo
+│   └── templates/                     # Jinja2 templates
+│       ├── base.html                  # Base template with navigation
+│       ├── index.html                 # Homepage (Flask version)
+│       ├── imprint.html               # Legal page (Flask version)
+│       ├── maintenance.html           # Data management hub
+│       ├── 404.html                   # Error page
+│       ├── entities/                  # Entity forms (6 forms + feedback)
+│       └── relationships/             # Relationship forms (3 forms + feedback)
 ├── fittrack_schema.sql                # Assignment 2: Database schema implementation
 ├── FitTrack Pro - ER Diagram.pdf     # Visual ER Diagram
 └── README.md                          # This file
@@ -104,6 +120,23 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 ✅ **Legal Compliance** - GDPR statement and German jurisdiction disclaimer  
 ✅ **Responsive Design** - Mobile-friendly layout with proper accessibility
 
+### 📋 Assignment 5 - Flask Web Application ✅
+- **Content:** Web frontend to database services with data entry forms
+- **Team Collaboration:** All members contributing forms
+- **Technology Stack:** Python Flask + MariaDB + Corporate Design CSS
+- **Files:**
+  - `fittrack_app/` - Complete Flask web application
+    - `app.py` - Main Flask application with all 9 routes and database logic
+    - `config.py` - Database configuration for MariaDB connection
+    - `requirements.txt` - Python dependencies (Flask, SQLAlchemy, PyMySQL)
+    - `templates/` - Jinja2 templates with Corporate Design integration
+    - `static/` - CSS and images from Assignment 4
+
+#### Work Distribution:
+- **Aleksandr Zinovev:** User forms, Progress Tracking, Workout-Exercise relationships, Flask setup
+- **Siwoo Lee:** Gym forms, Class forms, Class booking relationships  
+- **Arslan Ahmet Berk:** Exercise forms, Workout forms, Workout-Exercise relationships
+
 ## System Features
 
 ### Core Functionality
@@ -136,6 +169,7 @@ Based on the 3 ISA hierarchies in our database design:
 - **Assignment 2:** Relational Mapping ✅ **COMPLETED**
 - **Assignment 3:** Database Implementation ✅ **COMPLETED**
 - **Assignment 4:** Website Implementation ✅ **COMPLETED**
+- **Assignment 5:** Flask Web Application ✅ **COMPLETED**
 
 ## Contact
 
