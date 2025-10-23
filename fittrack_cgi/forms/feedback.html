@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success - FitTrack Pro</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../img/fittrack-pro-logo.svg" alt="FitTrack Pro" height="40">
+                <h1>FitTrack<span class="highlight">Pro</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#features">Features</a></li>
+                    <li><a href="../maintenance.html">Maintenance</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                    <li><a href="../imprint.html">Imprint</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="feedback-section">
+                <div class="success-message">
+                    <h1>✅ Success!</h1>
+                    <div class="feedback-details">
+                        <p><strong>Data submitted successfully!</strong></p>
+                        <p id="feedback-message">Your entry has been recorded.</p>
+                    </div>
+                    <div class="feedback-actions">
+                        <a href="javascript:history.back()" class="btn-primary">Go Back</a>
+                        <a href="../maintenance.html" class="btn-secondary">Back to Maintenance</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>FitTrack<span class="highlight">Pro</span></h3>
+                    <p>Database Systems Project 2025</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Development Team</h4>
+                    <p>Aleksandr Zinovev<br>
+                    Siwoo Lee<br>
+                    Arslan Ahmet Berk</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FitTrack Pro. Database Systems Course Project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Get form data from URL parameters
+        const params = new URLSearchParams(window.location.search);
+        const entityType = params.get('entity') || 'Entry';
+        const action = params.get('action') || 'added';
+        
+        document.getElementById('feedback-message').textContent = 
+            `${entityType} ${action} successfully! (Demo mode - no database connection)`;
+    </script>
+</body>
+</html>
