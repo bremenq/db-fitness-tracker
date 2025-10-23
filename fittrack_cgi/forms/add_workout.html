@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Workout - FitTrack Pro</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../img/fittrack-pro-logo.svg" alt="FitTrack Pro" height="40">
+                <h1>FitTrack<span class="highlight">Pro</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#features">Features</a></li>
+                    <li><a href="../maintenance.html">Maintenance</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                    <li><a href="../imprint.html">Imprint</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+
+<section class="form-section">
+    <h1>Add New Workout</h1>
+    <a href="../maintenance.html" class="back-link">← Back to Data Management</a>
+
+    <form method="POST" action="#" class="entity-form">
+        <div class="form-group">
+            <label for="user_id">Select User *</label>
+            <select id="user_id" name="user_id" required>
+                <option value="">-- Select User --</option>
+                <option value="1">demo_user (Demo User)</option>
+            </select>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="workout_name">Workout Name *</label>
+                <input type="text" id="workout_name" name="workout_name" required 
+                       placeholder="e.g., Upper Body Strength, Morning Cardio">
+            </div>
+
+            <div class="form-group">
+                <label for="date">Workout Date *</label>
+                <input type="date" id="date" name="date" required value="2025-10-23">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="start_time">Start Time</label>
+                <input type="time" id="start_time" name="start_time" 
+                       placeholder="e.g., 08:00">
+            </div>
+
+            <div class="form-group">
+                <label for="duration">Duration (minutes)</label>
+                <input type="number" id="duration" name="duration" min="1" max="300" 
+                       placeholder="e.g., 60">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="workout_type">Workout Type</label>
+            <select id="workout_type" name="workout_type">
+                <option value="">-- Select Type --</option>
+                <option value="Strength Training">Strength Training</option>
+                <option value="Cardio">Cardiovascular</option>
+                <option value="HIIT">High Intensity Interval Training</option>
+                <option value="Flexibility">Flexibility & Stretching</option>
+                <option value="Sports">Sports Training</option>
+                <option value="Mixed">Mixed Training</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="notes">Workout Notes</label>
+            <textarea id="notes" name="notes" rows="4" 
+                      placeholder="Any additional notes about this workout session, goals, or observations..."></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">Create Workout</button>
+            <a href="../maintenance.html" class="btn-secondary">Cancel</a>
+        </div>
+    </form>
+
+    <div class="form-help">
+        <h3>💡 Workout Planning Tips:</h3>
+        <ul>
+            <li><strong>Name:</strong> Use descriptive names that indicate focus (e.g., "Leg Day", "Cardio Blast")</li>
+            <li><strong>Date:</strong> Can be past, present, or future workouts</li>
+            <li><strong>Duration:</strong> Estimate total workout time including rest</li>
+            <li><strong>Type:</strong> Choose the primary focus of the workout</li>
+            <li><strong>Next Step:</strong> After creating, use "Link Exercise to Workout" to add exercises</li>
+        </ul>
+    </div>
+</section>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>FitTrack<span class="highlight">Pro</span></h3>
+                    <p>Database Systems Project 2025</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Development Team</h4>
+                    <p>Aleksandr Zinovev<br>
+                    Siwoo Lee<br>
+                    Arslan Ahmet Berk</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FitTrack Pro. Database Systems Course Project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showDemo(event, entityType) {
+            event.preventDefault();
+            alert('Demo Mode: In the full Flask application, this ' + entityType + ' would be saved to the database.\n\nFor the working version, run the Flask app locally:\ncd fittrack_app && python app.py');
+            return false;
+        }
+    </script>
+</body>
+</html>

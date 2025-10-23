@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Exercise - FitTrack Pro</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../img/fittrack-pro-logo.svg" alt="FitTrack Pro" height="40">
+                <h1>FitTrack<span class="highlight">Pro</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#features">Features</a></li>
+                    <li><a href="../maintenance.html">Maintenance</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                    <li><a href="../imprint.html">Imprint</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+
+<section class="form-section">
+    <h1>Add New Exercise</h1>
+    <a href="../maintenance.html" class="back-link">← Back to Data Management</a>
+
+    <form method="POST" action="#" class="entity-form">
+        <div class="form-group">
+            <label for="name">Exercise Name *</label>
+            <input type="text" id="name" name="name" required 
+                   placeholder="e.g., Bench Press, Push-ups, Running">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="category">Category *</label>
+                <select id="category" name="category" required>
+                    <option value="">-- Select Category --</option>
+                    <option value="Strength">Strength Training</option>
+                    <option value="Cardio">Cardiovascular</option>
+                    <option value="Flexibility">Flexibility</option>
+                    <option value="Balance">Balance & Stability</option>
+                    <option value="Sports">Sports Specific</option>
+                    <option value="Functional">Functional Training</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="difficulty_level">Difficulty Level</label>
+                <select id="difficulty_level" name="difficulty_level">
+                    <option value="">-- Select Level --</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                    <option value="Expert">Expert</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="muscle_groups">Primary Muscle Groups</label>
+                <input type="text" id="muscle_groups" name="muscle_groups" 
+                       placeholder="e.g., Chest, Triceps, Shoulders">
+            </div>
+
+            <div class="form-group">
+                <label for="equipment_needed">Equipment Needed</label>
+                <input type="text" id="equipment_needed" name="equipment_needed" 
+                       placeholder="e.g., Barbell, Dumbbells, None">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="instructions">Exercise Instructions</label>
+            <textarea id="instructions" name="instructions" rows="5" 
+                      placeholder="Detailed step-by-step instructions for performing this exercise safely and effectively..."></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">Add Exercise</button>
+            <a href="../maintenance.html" class="btn-secondary">Cancel</a>
+        </div>
+    </form>
+
+    <div class="form-help">
+        <h3>💡 Exercise Guidelines:</h3>
+        <ul>
+            <li><strong>Name:</strong> Use clear, descriptive names (e.g., "Barbell Bench Press" not just "Press")</li>
+            <li><strong>Category:</strong> Choose the primary focus of the exercise</li>
+            <li><strong>Muscle Groups:</strong> List main muscles worked, separated by commas</li>
+            <li><strong>Equipment:</strong> List all required equipment, or "None" for bodyweight</li>
+            <li><strong>Instructions:</strong> Include setup, execution, and safety tips</li>
+        </ul>
+    </div>
+</section>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>FitTrack<span class="highlight">Pro</span></h3>
+                    <p>Database Systems Project 2025</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Development Team</h4>
+                    <p>Aleksandr Zinovev<br>
+                    Siwoo Lee<br>
+                    Arslan Ahmet Berk</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FitTrack Pro. Database Systems Course Project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showDemo(event, entityType) {
+            event.preventDefault();
+            alert('Demo Mode: In the full Flask application, this ' + entityType + ' would be saved to the database.\n\nFor the working version, run the Flask app locally:\ncd fittrack_app && python app.py');
+            return false;
+        }
+    </script>
+</body>
+</html>
