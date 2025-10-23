@@ -158,7 +158,7 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
   - `templates/` - Jinja2 templates with Corporate Design
   - `static/` - CSS and images from Assignment 4
 
-#### CGI Implementation (`fittrack_cgi/`)
+#### CGI Implementation (`fittrack_cgi/`) - Deployable on ClamV
 - **Technology:** Python CGI scripts with PyMySQL (no mod_wsgi required)
 - **Features:**
   - Direct database connection to MariaDB on clabsql server
