@@ -15,7 +15,7 @@ cgitb.enable()
 
 # Database configuration
 DB_CONFIG = {
-    'host': 'clabsql.clamv.constructor.university',
+    'host': 'localhost',
     'user': 'azinovev',
     'password': 'WrtqlLcpgCPs0KGY',
     'database': 'db_azinovev',
