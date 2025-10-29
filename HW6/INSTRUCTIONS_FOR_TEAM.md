@@ -19,8 +19,6 @@ We're using **Python CGI scripts** instead of Flask for HW5 and HW6 because:
    - Database connection works perfectly
    - Deployed and tested on the server
 
-**Bottom line:** CGI is the practical solution that actually works on our university server.
-
 ---
 
 ## Where to Find Everything
