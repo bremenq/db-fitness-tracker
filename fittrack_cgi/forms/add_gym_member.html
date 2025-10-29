@@ -1,3 +1,4 @@
+Executing command on clabsql.clamv.constructor.university: cat ~/public_html/forms/add_gym_member.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +33,7 @@
     <h1>Add Gym Member</h1>
     <a href="../maintenance.html" class="back-link">← Back to Data Management</a>
 
-    <form method="POST" action="#" class="entity-form">
+    <form method="POST" action="../add_gym_member.py" class="entity-form">
         <div class="form-row">
             <div class="form-group">
                 <label for="user_id">Select User *</label>
@@ -87,12 +88,6 @@
             <a href="../maintenance.html" class="btn-secondary">Cancel</a>
         </div>
     </form>
-
-    <div class="form-help">
-        <h3>💡 Membership Guidelines:</h3>
-        <ul>
-            <li><strong>User:</strong> Must be an existing user in the system</li>
-            <li><strong>Membership ID:</strong> Unique identifier for this membership (e.g., MEM2025001)</li>
             <li><strong>Type:</strong> Basic (gym access), Premium (classes included), VIP (all services)</li>
             <li><strong>Dates:</strong> Start date is required, end date is optional for unlimited memberships</li>
             <li><strong>Note:</strong> A user can have memberships at multiple gyms</li>

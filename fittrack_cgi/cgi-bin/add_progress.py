@@ -1,7 +1,8 @@
-#!/usr/bin/env python3
+Executing command on clabsql.clamv.constructor.university: cat ~/public_html/add_progress.py
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 """
-CGI Script to add a new gym to FitTrack Pro database
+CGI Script to add progress tracking entry
 """
 
 import cgi
@@ -79,65 +80,64 @@ def print_html_end():
 </body>
 </html>""")
 
-def add_gym(form_data):
-    """Add gym to database"""
+def add_progress(form_data):
+    """Add progress entry to database"""
     try:
         conn = pymysql.connect(**DB_CONFIG)
         cursor = conn.cursor()
         
-        # Get form data
-        name = form_data.getvalue('name', '')
-        address = form_data.getvalue('address', '')
-        phone = form_data.getvalue('phone', None)
-        email = form_data.getvalue('email', None)
-        operating_hours = form_data.getvalue('operating_hours', None)
-        facilities = form_data.getvalue('facilities', None)
+        user_id = form_data.getvalue('user_id', '')
+        date = form_data.getvalue('date', '')
+        weight = form_data.getvalue('weight', None)
+        body_fat_percentage = form_data.getvalue('body_fat_percentage', None)
+        muscle_mass = form_data.getvalue('muscle_mass', None)
+        measurements = form_data.getvalue('measurements', None)
         
         # Validate required fields
-        if not all([name, address]):
+        if not all([user_id, date]):
             raise ValueError("Missing required fields")
         
-        # Insert gym
+        # Insert data
         sql = """
-            INSERT INTO gym (name, address, phone, email, operating_hours, facilities)
+            INSERT INTO progress_tracking (user_id, date, weight, body_fat_percentage, muscle_mass, measurements)
             VALUES (%s, %s, %s, %s, %s, %s)
         """
-        cursor.execute(sql, (name, address, phone, email, operating_hours, facilities))
+        cursor.execute(sql, (user_id, date, weight if weight else None, body_fat_percentage if body_fat_percentage else None, muscle_mass if muscle_mass else None, measurements if measurements else None))
         conn.commit()
         
-        gym_id = cursor.lastrowid
+        result_id = cursor.lastrowid
         
         cursor.close()
         conn.close()
         
-        return True, gym_id, name
+        return True, result_id, "Progress Entry added"
         
     except pymysql.Error as e:
         return False, None, f"Database error: {str(e)}"
     except Exception as e:
         return False, None, f"Error: {str(e)}"
 
+
 def main():
     print_header()
     form = cgi.FieldStorage()
-    success, gym_id, message = add_gym(form)
+    success, result_id, message = add_progress(form)
     
-    print_html_start("Add Gym Result")
+    print_html_start("Progress Entry Result")
     
     if success:
         print(f"""
             <section class="feedback-section">
                 <div class="success-message">
-                    <h1>✅ Gym Added Successfully!</h1>
+                    <h1>✅ Progress Entry Added Successfully!</h1>
                     <div class="feedback-details">
-                        <p><strong>Gym ID:</strong> {gym_id}</p>
-                        <p><strong>Name:</strong> {message}</p>
-                        <p><strong>Address:</strong> {form.getvalue('address', '')}</p>
-                        <p><strong>Phone:</strong> {form.getvalue('phone', 'N/A')}</p>
-                        <p><strong>Email:</strong> {form.getvalue('email', 'N/A')}</p>
+                        <p><strong>ID:</strong> {result_id}</p>
+                        <p><strong>User Id:</strong> {form.getvalue("user_id", "N/A")}</p>
+                        <p><strong>Date:</strong> {form.getvalue("date", "N/A")}</p>
+                        <p><strong>Weight:</strong> {form.getvalue("weight", "N/A")}</p>
                     </div>
                     <div class="feedback-actions">
-                        <a href="/~azinovev/forms/add_gym.html" class="btn-primary">Add Another Gym</a>
+                        <a href="/~azinovev/forms/add_progress.html" class="btn-primary">Add Another Progress Entry</a>
                         <a href="/~azinovev/maintenance.html" class="btn-secondary">Back to Maintenance</a>
                     </div>
                 </div>
@@ -147,7 +147,7 @@ def main():
         print(f"""
             <section class="feedback-section">
                 <div class="error-message">
-                    <h1>❌ Error Adding Gym</h1>
+                    <h1>❌ Error Adding Progress Entry</h1>
                     <div class="feedback-details">
                         <p><strong>Error:</strong> {message}</p>
                     </div>
@@ -163,4 +163,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

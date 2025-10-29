@@ -1,7 +1,8 @@
-#!/usr/bin/env python3
+Executing command on clabsql.clamv.constructor.university: cat ~/public_html/add_class.py
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 """
-CGI Script to link an exercise to a workout
+CGI Script to add a new fitness class
 """
 
 import cgi
@@ -79,30 +80,30 @@ def print_html_end():
 </body>
 </html>""")
 
-def add_workout_exercise(form_data):
-    """Add workout-exercise link to database"""
+def add_class(form_data):
+    """Add class to database"""
     try:
         conn = pymysql.connect(**DB_CONFIG)
         cursor = conn.cursor()
         
-        workout_id = form_data.getvalue('workout_id', '')
-        exercise_id = form_data.getvalue('exercise_id', '')
-        sets = form_data.getvalue('sets', None)
-        reps = form_data.getvalue('reps', None)
-        weight = form_data.getvalue('weight', None)
-        duration = form_data.getvalue('duration', None)
-        rest_time = form_data.getvalue('rest_time', None)
+        gym_id = form_data.getvalue('gym_id', '')
+        trainer_id = form_data.getvalue('trainer_id', '') or None
+        name = form_data.getvalue('name', '')
+        description = form_data.getvalue('description', None)
+        schedule_time = form_data.getvalue('schedule_time', '')
+        duration = form_data.getvalue('duration', '')
+        max_capacity = form_data.getvalue('max_capacity', None)
         
         # Validate required fields
-        if not all([workout_id, exercise_id]):
+        if not all([gym_id, name, schedule_time, duration]):
             raise ValueError("Missing required fields")
         
         # Insert data
         sql = """
-            INSERT INTO workout_exercise (workout_id, exercise_id, sets, reps, weight, duration, rest_time)
+            INSERT INTO class (gym_id, trainer_id, name, description, schedule_time, duration, max_capacity)
             VALUES (%s, %s, %s, %s, %s, %s, %s)
         """
-        cursor.execute(sql, (workout_id, exercise_id, sets if sets else None, reps if reps else None, weight if weight else None, duration if duration else None, rest_time if rest_time else None))
+        cursor.execute(sql, (gym_id, trainer_id if trainer_id else None, name, description if description else None, schedule_time, duration, max_capacity if max_capacity else None))
         conn.commit()
         
         result_id = cursor.lastrowid
@@ -110,7 +111,7 @@ def add_workout_exercise(form_data):
         cursor.close()
         conn.close()
         
-        return True, result_id, "Workout-Exercise Link added"
+        return True, result_id, "Class added"
         
     except pymysql.Error as e:
         return False, None, f"Database error: {str(e)}"
@@ -121,23 +122,23 @@ def add_workout_exercise(form_data):
 def main():
     print_header()
     form = cgi.FieldStorage()
-    success, result_id, message = add_workout_exercise(form)
+    success, result_id, message = add_class(form)
     
-    print_html_start("Workout-Exercise Link Result")
+    print_html_start("Class Result")
     
     if success:
         print(f"""
             <section class="feedback-section">
                 <div class="success-message">
-                    <h1>✅ Workout-Exercise Link Created Successfully!</h1>
+                    <h1>✅ Class Added Successfully!</h1>
                     <div class="feedback-details">
                         <p><strong>ID:</strong> {result_id}</p>
-                        <p><strong>Workout Id:</strong> {form.getvalue("workout_id", "N/A")}</p>
-                        <p><strong>Exercise Id:</strong> {form.getvalue("exercise_id", "N/A")}</p>
-                        <p><strong>Sets:</strong> {form.getvalue("sets", "N/A")}</p>
+                        <p><strong>Gym Id:</strong> {form.getvalue("gym_id", "N/A")}</p>
+                        <p><strong>Trainer Id:</strong> {form.getvalue("trainer_id", "N/A")}</p>
+                        <p><strong>Name:</strong> {form.getvalue("name", "N/A")}</p>
                     </div>
                     <div class="feedback-actions">
-                        <a href="/~azinovev/forms/add_workout_exercise.html" class="btn-primary">Create Another Workout-Exercise Link</a>
+                        <a href="/~azinovev/forms/add_class.html" class="btn-primary">Add Another Class</a>
                         <a href="/~azinovev/maintenance.html" class="btn-secondary">Back to Maintenance</a>
                     </div>
                 </div>
@@ -147,7 +148,7 @@ def main():
         print(f"""
             <section class="feedback-section">
                 <div class="error-message">
-                    <h1>❌ Error Creating Workout-Exercise Link</h1>
+                    <h1>❌ Error Adding Class</h1>
                     <div class="feedback-details">
                         <p><strong>Error:</strong> {message}</p>
                     </div>

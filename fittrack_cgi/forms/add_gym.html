@@ -1,3 +1,4 @@
+Executing command on clabsql.clamv.constructor.university: cat ~/public_html/forms/add_gym.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +33,7 @@
     <h1>Add New Gym</h1>
     <a href="../maintenance.html" class="back-link">← Back to Data Management</a>
 
-    <form method="POST" action="#" class="entity-form">
+    <form method="POST" action="../add_gym.py" class="entity-form">
         <div class="form-group">
             <label for="name">Gym Name *</label>
             <input type="text" id="name" name="name" required 
@@ -112,12 +113,5 @@
         </div>
     </footer>
 
-    <script>
-        function showDemo(event, entityType) {
-            event.preventDefault();
-            alert('Demo Mode: In the full Flask application, this ' + entityType + ' would be saved to the database.\n\nFor the working version, run the Flask app locally:\ncd fittrack_app && python app.py');
-            return false;
-        }
-    </script>
 </body>
 </html>

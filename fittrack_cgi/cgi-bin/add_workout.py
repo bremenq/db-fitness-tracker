@@ -1,7 +1,8 @@
-#!/usr/bin/env python3
+Executing command on clabsql.clamv.constructor.university: cat ~/public_html/add_workout.py
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 """
-CGI Script to book a class for a member
+CGI Script to add a new workout session
 """
 
 import cgi
@@ -79,26 +80,29 @@ def print_html_end():
 </body>
 </html>""")
 
-def add_class_booking(form_data):
-    """Add class booking to database"""
+def add_workout(form_data):
+    """Add workout to database"""
     try:
         conn = pymysql.connect(**DB_CONFIG)
         cursor = conn.cursor()
         
-        class_id = form_data.getvalue('class_id', '')
-        member_id = form_data.getvalue('member_id', '')
-        status = form_data.getvalue('status', None)
+        user_id = form_data.getvalue('user_id', '')
+        workout_name = form_data.getvalue('workout_name', '')
+        date = form_data.getvalue('date', '')
+        duration = form_data.getvalue('duration', None)
+        calories_burned = form_data.getvalue('calories_burned', None)
+        notes = form_data.getvalue('notes', None)
         
         # Validate required fields
-        if not all([class_id, member_id]):
+        if not all([user_id, workout_name, date]):
             raise ValueError("Missing required fields")
         
         # Insert data
         sql = """
-            INSERT INTO class_booking (class_id, member_id, status)
-            VALUES (%s, %s, %s)
+            INSERT INTO workout (user_id, workout_name, date, duration, calories_burned, notes)
+            VALUES (%s, %s, %s, %s, %s, %s)
         """
-        cursor.execute(sql, (class_id, member_id, status if status else None))
+        cursor.execute(sql, (user_id, workout_name, date, duration if duration else None, calories_burned if calories_burned else None, notes if notes else None))
         conn.commit()
         
         result_id = cursor.lastrowid
@@ -106,7 +110,7 @@ def add_class_booking(form_data):
         cursor.close()
         conn.close()
         
-        return True, result_id, "Class Booking added"
+        return True, result_id, "Workout added"
         
     except pymysql.Error as e:
         return False, None, f"Database error: {str(e)}"
@@ -117,23 +121,23 @@ def add_class_booking(form_data):
 def main():
     print_header()
     form = cgi.FieldStorage()
-    success, result_id, message = add_class_booking(form)
+    success, result_id, message = add_workout(form)
     
-    print_html_start("Class Booking Result")
+    print_html_start("Workout Result")
     
     if success:
         print(f"""
             <section class="feedback-section">
                 <div class="success-message">
-                    <h1>✅ Class Booking Created Successfully!</h1>
+                    <h1>✅ Workout Added Successfully!</h1>
                     <div class="feedback-details">
                         <p><strong>ID:</strong> {result_id}</p>
-                        <p><strong>Class Id:</strong> {form.getvalue("class_id", "N/A")}</p>
-                        <p><strong>Member Id:</strong> {form.getvalue("member_id", "N/A")}</p>
-                        <p><strong>Status:</strong> {form.getvalue("status", "N/A")}</p>
+                        <p><strong>User Id:</strong> {form.getvalue("user_id", "N/A")}</p>
+                        <p><strong>Workout Name:</strong> {form.getvalue("workout_name", "N/A")}</p>
+                        <p><strong>Date:</strong> {form.getvalue("date", "N/A")}</p>
                     </div>
                     <div class="feedback-actions">
-                        <a href="/~azinovev/forms/add_class_booking.html" class="btn-primary">Create Another Class Booking</a>
+                        <a href="/~azinovev/forms/add_workout.html" class="btn-primary">Add Another Workout</a>
                         <a href="/~azinovev/maintenance.html" class="btn-secondary">Back to Maintenance</a>
                     </div>
                 </div>
@@ -143,7 +147,7 @@ def main():
         print(f"""
             <section class="feedback-section">
                 <div class="error-message">
-                    <h1>❌ Error Creating Class Booking</h1>
+                    <h1>❌ Error Adding Workout</h1>
                     <div class="feedback-details">
                         <p><strong>Error:</strong> {message}</p>
                     </div>
