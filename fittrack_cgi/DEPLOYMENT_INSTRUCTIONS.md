@@ -1,15 +1,42 @@
 # 🚀 FitTrack Pro - ClamV Server Deployment Instructions
 
+## ⚡ Quick Deploy (One Command)
+
+```bash
+# Set your credentials
+USERNAME="your_username"
+PASSWORD="your_password"
+
+# Deploy everything at once
+sshpass -p "$PASSWORD" scp -r -o PreferredAuthentications=password -o PubkeyAuthentication=no \
+  db1/fittrack_cgi/* ${USERNAME}@clabsql.clamv.constructor.university:~/public_html/ && \
+sshpass -p "$PASSWORD" ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no \
+  ${USERNAME}@clabsql.clamv.constructor.university "chmod +x ~/public_html/*.py"
+
+echo "✅ Deployment complete! Visit: https://clabsql.clamv.constructor.university/~${USERNAME}/"
+```
+
+---
+
 ## 📋 Prerequisites
 
 Before starting, ensure you have:
 - Access to a ClamV server with your student account
 - SSH access to the server
 - MySQL database access with your credentials
+- `sshpass` installed (for password-based deployment)
 
 ## 🔧 Step 1: Server Setup
 
 ### 1.1 Connect to Your ClamV Server
+
+**Option A: With sshpass (no password prompt)**
+```bash
+sshpass -p "your_password" ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no \
+  your_username@clabsql.clamv.constructor.university
+```
+
+**Option B: Interactive (enter password when prompted)**
 ```bash
 ssh your_username@clabsql.clamv.constructor.university
 ```
@@ -31,22 +58,42 @@ chmod 755 ~/public_html/img
 ## 📦 Step 2: Upload Files
 
 ### 2.1 Upload All Files
-Upload the entire `cgi_deployment` folder contents to your server:
+Upload the entire `fittrack_cgi` folder contents to your server:
 
-**Option A: Using SCP (from your local machine)**
+**Option A: Using SCP with password (recommended for quick deployment)**
+```bash
+# Set your credentials
+USERNAME="your_username"
+PASSWORD="your_password"
+
+# Upload all files at once
+sshpass -p "$PASSWORD" scp -r -o PreferredAuthentications=password -o PubkeyAuthentication=no \
+  db1/fittrack_cgi/* ${USERNAME}@clabsql.clamv.constructor.university:~/public_html/
+```
+
+**Option B: Using SCP with interactive password**
 ```bash
 # Upload forms
-scp cgi_deployment/forms/*.html your_username@clabsql.clamv.constructor.university:~/public_html/forms/
+scp db1/fittrack_cgi/forms/*.html your_username@clabsql.clamv.constructor.university:~/public_html/forms/
 
 # Upload CGI scripts to root (not cgi-bin!)
-scp cgi_deployment/cgi-bin/*.py your_username@clabsql.clamv.constructor.university:~/public_html/
+scp db1/fittrack_cgi/*.py your_username@clabsql.clamv.constructor.university:~/public_html/
 
 # Upload assets
-scp cgi_deployment/css/style.css your_username@clabsql.clamv.constructor.university:~/public_html/css/
-scp cgi_deployment/img/* your_username@clabsql.clamv.constructor.university:~/public_html/img/
+scp db1/fittrack_cgi/css/style.css your_username@clabsql.clamv.constructor.university:~/public_html/css/
+scp db1/fittrack_cgi/img/* your_username@clabsql.clamv.constructor.university:~/public_html/img/
 
 # Upload static pages
-scp cgi_deployment/*.html your_username@clabsql.clamv.constructor.university:~/public_html/
+scp db1/fittrack_cgi/*.html your_username@clabsql.clamv.constructor.university:~/public_html/
+```
+
+**Note:** Install `sshpass` if not available:
+```bash
+# macOS
+brew install sshpass
+
+# Linux
+sudo apt-get install sshpass
 ```
 
 **Option B: Manual Upload via SSH**
@@ -59,8 +106,16 @@ ssh your_username@clabsql.clamv.constructor.university
 ```
 
 ### 2.2 Set Script Permissions
+
+**On the server:**
 ```bash
 chmod +x ~/public_html/*.py
+```
+
+**Or remotely with sshpass:**
+```bash
+sshpass -p "your_password" ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no \
+  your_username@clabsql.clamv.constructor.university "chmod +x ~/public_html/*.py"
 ```
 
 ## 🗄️ Step 3: Database Configuration
