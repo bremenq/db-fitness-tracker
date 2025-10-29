@@ -128,11 +128,7 @@ This file contains:
    - Accept `exercise_id` parameter
    - Show: exercise info, instructions, session history
 
-### Step 5: Test Locally (Optional)
-
-You can test the HTML forms locally by opening them in a browser, but the CGI scripts need to be on the server to work.
-
-### Step 6: Deploy to Your ClamV Server
+### Step 5: Deploy to Your ClamV Server
 
 **Full deployment guide:** See **`fittrack_cgi/DEPLOYMENT_INSTRUCTIONS.md`** for complete instructions.
 
@@ -151,7 +147,7 @@ sshpass -p "$PASSWORD" ssh ${USERNAME}@clabsql.clamv.constructor.university "chm
 
 **Note:** Each team member should deploy to their own ClamV server for testing. You'll have your own database and can test independently!
 
-### Step 7: Test on Server
+### Step 6: Test on Server
 
 Visit: `https://clabsql.clamv.constructor.university/~your_username/forms/search_hub.html`
 
