@@ -1,3 +1,4 @@
+Executing command on clabsql.clamv.constructor.university: cat ~/public_html/forms/add_exercise.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +33,7 @@
     <h1>Add New Exercise</h1>
     <a href="../maintenance.html" class="back-link">← Back to Data Management</a>
 
-    <form method="POST" action="#" class="entity-form">
+    <form method="POST" action="../add_exercise.py" class="entity-form">
         <div class="form-group">
             <label for="name">Exercise Name *</label>
             <input type="text" id="name" name="name" required 
@@ -57,10 +58,10 @@
                 <label for="difficulty_level">Difficulty Level</label>
                 <select id="difficulty_level" name="difficulty_level">
                     <option value="">-- Select Level --</option>
-                    <option value="Beginner">Beginner</option>
-                    <option value="Intermediate">Intermediate</option>
-                    <option value="Advanced">Advanced</option>
-                    <option value="Expert">Expert</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                    
                 </select>
             </div>
         </div>
@@ -94,7 +95,6 @@
     <div class="form-help">
         <h3>💡 Exercise Guidelines:</h3>
         <ul>
-            <li><strong>Name:</strong> Use clear, descriptive names (e.g., "Barbell Bench Press" not just "Press")</li>
             <li><strong>Category:</strong> Choose the primary focus of the exercise</li>
             <li><strong>Muscle Groups:</strong> List main muscles worked, separated by commas</li>
             <li><strong>Equipment:</strong> List all required equipment, or "None" for bodyweight</li>
@@ -126,12 +126,5 @@
         </div>
     </footer>
 
-    <script>
-        function showDemo(event, entityType) {
-            event.preventDefault();
-            alert('Demo Mode: In the full Flask application, this ' + entityType + ' would be saved to the database.\n\nFor the working version, run the Flask app locally:\ncd fittrack_app && python app.py');
-            return false;
-        }
-    </script>
 </body>
 </html>

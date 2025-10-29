@@ -1,3 +1,4 @@
+Executing command on clabsql.clamv.constructor.university: cat ~/public_html/forms/add_class.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +33,7 @@
     <h1>Add New Class</h1>
     <a href="../maintenance.html" class="back-link">← Back to Data Management</a>
 
-    <form method="POST" action="#" class="entity-form">
+    <form method="POST" action="../add_class.py" class="entity-form">
         <div class="form-group">
             <label for="gym_id">Select Gym *</label>
             <select id="gym_id" name="gym_id" required>
@@ -43,37 +44,21 @@
 
         <div class="form-row">
             <div class="form-group">
-                <label for="class_name">Class Name *</label>
-                <input type="text" id="class_name" name="class_name" required 
+                <label for="name">Class Name *</label>
+                <input type="text" id="name" name="name" required 
                        placeholder="e.g., Morning Yoga, HIIT Bootcamp">
             </div>
 
             <div class="form-group">
-                <label for="instructor_name">Instructor Name</label>
-                <input type="text" id="instructor_name" name="instructor_name" 
-                       placeholder="e.g., Sarah Johnson">
+                <label for="trainer_id">Trainer ID (Optional)</label>
+                <input type="number" id="trainer_id" name="trainer_id" 
+                       placeholder="Leave empty if no trainer">
             </div>
         </div>
 
-        <div class="form-row">
-            <div class="form-group">
-                <label for="schedule_day">Day of Week *</label>
-                <select id="schedule_day" name="schedule_day" required>
-                    <option value="">-- Select Day --</option>
-                    <option value="Monday">Monday</option>
-                    <option value="Tuesday">Tuesday</option>
-                    <option value="Wednesday">Wednesday</option>
-                    <option value="Thursday">Thursday</option>
-                    <option value="Friday">Friday</option>
-                    <option value="Saturday">Saturday</option>
-                    <option value="Sunday">Sunday</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="schedule_time">Class Time *</label>
-                <input type="time" id="schedule_time" name="schedule_time" required>
-            </div>
+        <div class="form-group">
+            <label for="schedule_time">Schedule Date & Time *</label>
+            <input type="datetime-local" id="schedule_time" name="schedule_time" required>
         </div>
 
         <div class="form-row">
@@ -91,23 +76,6 @@
         </div>
 
         <div class="form-group">
-            <label for="class_type">Class Type</label>
-            <select id="class_type" name="class_type">
-                <option value="">-- Select Type --</option>
-                <option value="Yoga">Yoga</option>
-                <option value="Pilates">Pilates</option>
-                <option value="HIIT">High Intensity Interval Training</option>
-                <option value="Cardio">Cardio</option>
-                <option value="Strength">Strength Training</option>
-                <option value="Dance">Dance Fitness</option>
-                <option value="Martial Arts">Martial Arts</option>
-                <option value="Aqua">Aqua Fitness</option>
-                <option value="Cycling">Indoor Cycling</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
-
-        <div class="form-group">
             <label for="description">Class Description</label>
             <textarea id="description" name="description" rows="4" 
                       placeholder="Brief description of the class, difficulty level, what to expect..."></textarea>
@@ -122,11 +90,12 @@
     <div class="form-help">
         <h3>💡 Class Scheduling Tips:</h3>
         <ul>
+            <li><strong>Gym:</strong> Select the gym where this class will be held</li>
             <li><strong>Name:</strong> Use clear, appealing names that describe the class</li>
-            <li><strong>Schedule:</strong> Choose consistent day/time for regular classes</li>
+            <li><strong>Trainer ID:</strong> Optional - ID of the trainer leading this class</li>
+            <li><strong>Schedule:</strong> Set the date and time for the class</li>
             <li><strong>Duration:</strong> Standard classes are 45-90 minutes</li>
-            <li><strong>Capacity:</strong> Consider room size and equipment availability</li>
-            <li><strong>Description:</strong> Include difficulty level and what participants need to bring</li>
+            <li><strong>Capacity:</strong> Maximum number of participants (optional)</li>
         </ul>
     </div>
 </section>

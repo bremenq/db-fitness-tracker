@@ -1,3 +1,4 @@
+Executing command on clabsql.clamv.constructor.university: cat ~/public_html/forms/add_progress.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,10 +33,10 @@
     <h1>Add Progress Tracking</h1>
     <a href="../maintenance.html" class="back-link">← Back to Data Management</a>
 
-    <form method="POST" action="#" class="entity-form">
+    <form method="POST" action="../add_progress.py" class="entity-form">
         <div class="form-group">
             <label for="user_id">Select User *</label>
-            <select id="user_id" name="user_id" required>
+            <select id="user_id" name="user_id" required data-dynamic="users">
                 <option value="">-- Select User --</option>
                 <option value="1">demo_user (Demo User)</option>
             </select>
@@ -119,5 +120,29 @@
             return false;
         }
     </script>
+<script>
+// Load dynamic dropdown data
+document.addEventListener("DOMContentLoaded", function() {
+    const userSelect = document.getElementById("user_id");
+    if (userSelect) {
+        fetch("/~azinovev/get_data.py?type=users")
+            .then(response => response.json())
+            .then(users => {
+                // Clear existing options except the first one
+                while (userSelect.options.length > 1) {
+                    userSelect.remove(1);
+                }
+                // Add users from database
+                users.forEach(user => {
+                    const option = document.createElement("option");
+                    option.value = user.id;
+                    option.textContent = `${user.name} (${user.email})`;
+                    userSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error("Error loading users:", error));
+    }
+});
+</script>
 </body>
 </html>

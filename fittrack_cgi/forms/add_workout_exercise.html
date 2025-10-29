@@ -1,3 +1,7 @@
+Executing command on clabsql.clamv.constructor.university: 
+cd ~/public_html/forms
+cat add_workout_exercise.html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,13 +36,12 @@
     <h1>Link Exercise to Workout</h1>
     <a href="../maintenance.html" class="back-link">← Back to Data Management</a>
 
-    <form method="POST" action="#" class="entity-form">
+    <form method="POST" action="../add_workout_exercise.py" class="entity-form">
         <div class="form-row">
             <div class="form-group">
                 <label for="workout_id">Select Workout *</label>
                 <select id="workout_id" name="workout_id" required>
                     <option value="">-- Select Workout --</option>
-                    <option value="1">Morning Workout (2025-10-23)</option>
                 </select>
             </div>
 
@@ -46,7 +49,6 @@
                 <label for="exercise_id">Select Exercise *</label>
                 <select id="exercise_id" name="exercise_id" required>
                     <option value="">-- Select Exercise --</option>
-                    <option value="1">Bench Press</option>
                 </select>
             </div>
         </div>
@@ -135,11 +137,38 @@
     </footer>
 
     <script>
-        function showDemo(event, entityType) {
-            event.preventDefault();
-            alert('Demo Mode: In the full Flask application, this ' + entityType + ' would be saved to the database.\n\nFor the working version, run the Flask app locally:\ncd fittrack_app && python app.py');
-            return false;
+        async function loadDropdownData() {
+            try {
+                // Load workouts
+                const workoutResponse = await fetch('../get_data.py?type=workouts');
+                const workouts = await workoutResponse.json();
+                const workoutSelect = document.getElementById('workout_id');
+                
+                workouts.forEach(workout => {
+                    const option = document.createElement('option');
+                    option.value = workout.id;
+                    option.textContent = `${workout.name} (${workout.date})`;
+                    workoutSelect.appendChild(option);
+                });
+
+                // Load exercises
+                const exerciseResponse = await fetch('../get_data.py?type=exercises');
+                const exercises = await exerciseResponse.json();
+                const exerciseSelect = document.getElementById('exercise_id');
+                
+                exercises.forEach(exercise => {
+                    const option = document.createElement('option');
+                    option.value = exercise.id;
+                    option.textContent = `${exercise.name} (${exercise.category})`;
+                    exerciseSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading dropdown data:', error);
+            }
         }
+
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', loadDropdownData);
     </script>
 </body>
 </html>
