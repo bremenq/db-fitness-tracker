@@ -3,13 +3,17 @@
 ## ⚡ Quick Deploy (One Command)
 
 ```bash
+# Clone the repository first
+git clone https://github.com/bremenq/db-fitness-tracker.git
+cd db-fitness-tracker/fittrack_cgi
+
 # Set your credentials
 USERNAME="your_username"
 PASSWORD="your_password"
 
 # Deploy everything at once
 sshpass -p "$PASSWORD" scp -r -o PreferredAuthentications=password -o PubkeyAuthentication=no \
-  db1/fittrack_cgi/* ${USERNAME}@clabsql.clamv.constructor.university:~/public_html/ && \
+  ./* ${USERNAME}@clabsql.clamv.constructor.university:~/public_html/ && \
 sshpass -p "$PASSWORD" ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no \
   ${USERNAME}@clabsql.clamv.constructor.university "chmod +x ~/public_html/*.py"
 
@@ -62,29 +66,35 @@ Upload the entire `fittrack_cgi` folder contents to your server:
 
 **Option A: Using SCP with password (recommended for quick deployment)**
 ```bash
+# From the fittrack_cgi directory
+cd fittrack_cgi
+
 # Set your credentials
 USERNAME="your_username"
 PASSWORD="your_password"
 
 # Upload all files at once
 sshpass -p "$PASSWORD" scp -r -o PreferredAuthentications=password -o PubkeyAuthentication=no \
-  db1/fittrack_cgi/* ${USERNAME}@clabsql.clamv.constructor.university:~/public_html/
+  ./* ${USERNAME}@clabsql.clamv.constructor.university:~/public_html/
 ```
 
 **Option B: Using SCP with interactive password**
 ```bash
+# From the fittrack_cgi directory
+cd fittrack_cgi
+
 # Upload forms
-scp db1/fittrack_cgi/forms/*.html your_username@clabsql.clamv.constructor.university:~/public_html/forms/
+scp forms/*.html your_username@clabsql.clamv.constructor.university:~/public_html/forms/
 
 # Upload CGI scripts to root (not cgi-bin!)
-scp db1/fittrack_cgi/*.py your_username@clabsql.clamv.constructor.university:~/public_html/
+scp *.py your_username@clabsql.clamv.constructor.university:~/public_html/
 
 # Upload assets
-scp db1/fittrack_cgi/css/style.css your_username@clabsql.clamv.constructor.university:~/public_html/css/
-scp db1/fittrack_cgi/img/* your_username@clabsql.clamv.constructor.university:~/public_html/img/
+scp css/style.css your_username@clabsql.clamv.constructor.university:~/public_html/css/
+scp img/* your_username@clabsql.clamv.constructor.university:~/public_html/img/
 
 # Upload static pages
-scp db1/fittrack_cgi/*.html your_username@clabsql.clamv.constructor.university:~/public_html/
+scp *.html your_username@clabsql.clamv.constructor.university:~/public_html/
 ```
 
 **Note:** Install `sshpass` if not available:
