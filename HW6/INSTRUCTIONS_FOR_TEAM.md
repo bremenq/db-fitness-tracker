@@ -178,15 +178,6 @@ Test your search functionality!
 
 ---
 
-## Need Help?
-
-1. **Read the implementation plan:** `HW6/HW6_Search_Implementation_Plan.md`
-2. **Study my code:** It's your best example!
-3. **Check deployment guide:** `fittrack_cgi/DEPLOYMENT_INSTRUCTIONS.md`
-4. **Ask in the team chat:** I'm here to help!
-
----
-
 ## Deadline
 
 **2025-10-30 23:59**
