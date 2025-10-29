@@ -74,7 +74,7 @@ This file contains:
 - 📝 Suggested implementation steps
 - 💡 Database queries to use
 
-### Step 3: Study Aleksandr's Implementation
+### Step 3: Study My Implementation (Aleksandr's completed work)
 
 **Look at these 3 files to understand the pattern:**
 
@@ -185,9 +185,9 @@ Test your search functionality!
 ## Need Help?
 
 1. **Read the implementation plan:** `HW6/HW6_Search_Implementation_Plan.md`
-2. **Study Aleksandr's code:** It's your best example!
+2. **Study my code:** It's your best example!
 3. **Check deployment guide:** `fittrack_cgi/DEPLOYMENT_INSTRUCTIONS.md`
-4. **Ask in the team chat:** We're here to help!
+4. **Ask in the team chat:** I'm here to help!
 
 ---
 
@@ -195,7 +195,7 @@ Test your search functionality!
 
 **2025-10-30 23:59**
 
-Aleksandr's part is done (33% complete). We need Lee and Arslan to complete their searches to finish HW6!
+My part is done (33% complete). We need Lee and Arslan to complete their searches to finish HW6!
 
 Good luck! 🚀
 
