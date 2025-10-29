@@ -14,31 +14,35 @@ fittrack_cgi/
 ├── img/
 │   └── fittrack-pro-logo.svg
 ├── forms/                  # HTML forms
-│   ├── add_user.html
-│   ├── add_gym.html
-│   ├── add_workout.html
-│   ├── add_exercise.html
-│   ├── add_class.html
-│   ├── add_progress.html
-│   ├── add_workout_exercise.html
-│   ├── add_class_booking.html
-│   ├── add_gym_member.html
-│   ├── search_hub.html              # Search landing page (HW6)
-│   ├── search_user_activity.html    # User activity search (HW6)
-│   └── search_gym_members.html      # Gym member search (HW6)
-└── *.py                    # CGI Python scripts (in root)
-    ├── add_user.py
-    ├── add_gym.py
-    ├── add_workout.py
-    ├── add_exercise.py
-    ├── add_class.py
-    ├── add_progress.py
-    ├── add_workout_exercise.py
-    ├── add_class_booking.py
-    ├── add_gym_member.py
-    ├── get_data.py                  # AJAX data provider
-    ├── search_user_activity.py      # User activity search (HW6)
-    └── user_detail.py               # User detail page (HW6)
+│   ├── add_user.html                # HW5
+│   ├── add_gym.html                 # HW5
+│   ├── add_workout.html             # HW5
+│   ├── add_exercise.html            # HW5
+│   ├── add_class.html               # HW5
+│   ├── add_progress.html            # HW5
+│   ├── add_workout_exercise.html    # HW5
+│   ├── add_class_booking.html       # HW5
+│   ├── add_gym_member.html          # HW5
+│   ├── search_hub.html              # HW6 - Search landing page
+│   ├── search_user_activity.html    # HW6 - User activity search form
+│   └── search_gym_members.html      # HW6 - Gym member search form
+│
+└── *.py                    # Python CGI scripts (in root directory)
+    │                       # CGI = Common Gateway Interface
+    │                       # These scripts process form submissions and interact with database
+    │
+    ├── add_user.py                  # HW5 - Process user form
+    ├── add_gym.py                   # HW5 - Process gym form
+    ├── add_workout.py               # HW5 - Process workout form
+    ├── add_exercise.py              # HW5 - Process exercise form
+    ├── add_class.py                 # HW5 - Process class form
+    ├── add_progress.py              # HW5 - Process progress form
+    ├── add_workout_exercise.py      # HW5 - Process workout-exercise linking
+    ├── add_class_booking.py         # HW5 - Process class booking form
+    ├── add_gym_member.py            # HW5 - Process gym member form
+    ├── get_data.py                  # HW5 - AJAX data provider for dropdowns
+    ├── search_user_activity.py      # HW6 - User activity search results
+    └── user_detail.py               # HW6 - Individual user detail page
 ```
 
 ## 🎯 Features
@@ -77,11 +81,20 @@ All Python CGI scripts are located in the `public_html` root directory (NOT in a
 
 ## 🔧 Technical Details
 
-- **CGI Scripts**: Python 3.6+ with PyMySQL
+### What are CGI Scripts?
+**CGI (Common Gateway Interface)** scripts are programs that run on the web server to process web requests. Our `.py` files are Python CGI scripts that:
+- Execute when a form is submitted
+- Connect to the database using PyMySQL
+- Process data and perform SQL operations
+- Return HTML response pages to the browser
+
+### Technology Stack
+- **CGI Scripts**: Python 3.6+ (`.py` files are executable CGI scripts)
 - **Database**: MariaDB on localhost
-- **Web Server**: Apache with CGI enabled
-- **Authentication**: Database credentials in each script
-- **AJAX**: `get_data.py` provides JSON for dynamic dropdowns
+- **Database Library**: PyMySQL for Python-to-MySQL connectivity
+- **Web Server**: Apache with CGI execution enabled
+- **Authentication**: Database credentials embedded in each script
+- **AJAX**: `get_data.py` provides JSON for dynamic form dropdowns
 
 ## 👥 Team
 
@@ -91,5 +104,5 @@ All Python CGI scripts are located in the `public_html` root directory (NOT in a
 
 ---
 
-**Assignment 5 - Database Systems Course 2025**
+**Database Systems Course 2025**
 
