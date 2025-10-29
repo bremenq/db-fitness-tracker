@@ -1,4 +1,3 @@
-Executing command on clabsql.clamv.constructor.university: cat ~/public_html/get_data.py
 #!/usr/bin/python3
 import cgi
 import pymysql

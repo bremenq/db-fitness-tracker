@@ -1,4 +1,3 @@
-Executing command on clabsql.clamv.constructor.university: cat ~/public_html/add_exercise.py
 #!/usr/bin/python3
 import cgi
 import pymysql
@@ -49,38 +48,30 @@ def print_html_end():
 </body>
 </html>''')
 
-def add_exercise(form_data):
+def add_gym_member(form_data):
     try:
         conn = pymysql.connect(**DB_CONFIG)
         cursor = conn.cursor()
         
-        name = form_data.getvalue('name', '')
-        category = form_data.getvalue('category', '')
-        muscle_groups = form_data.getvalue('muscle_groups', '')
-        difficulty = form_data.getvalue('difficulty_level', '')
-        instructions = form_data.getvalue('instructions', '')
-        equipment_needed = form_data.getvalue('equipment_needed', '')
+        user_id = form_data.getvalue('user_id', '')
+        gym_id = form_data.getvalue('gym_id', '')
+        membership_id = form_data.getvalue('membership_id', '')
+        membership_type = form_data.getvalue('membership_type', '')
+        start_date = form_data.getvalue('start_date', '')
+        end_date = form_data.getvalue('end_date', '')
         
-        if not name:
+        if not all([user_id, gym_id, membership_id, membership_type, start_date]):
             raise ValueError('Missing required fields')
         
-        sql = '''INSERT INTO exercise (name, category, muscle_groups, difficulty, instructions, equipment_needed) 
+        sql = '''INSERT INTO gym_member (user_id, gym_id, membership_id, membership_type, start_date, end_date) 
                  VALUES (%s, %s, %s, %s, %s, %s)'''
-        cursor.execute(sql, (
-            name, 
-            category or None,
-            muscle_groups or None, 
-            difficulty or None,
-            instructions or None, 
-            equipment_needed or None
-        ))
+        cursor.execute(sql, (user_id, gym_id, membership_id, membership_type, start_date, end_date if end_date else None))
         conn.commit()
         
-        exercise_id = cursor.lastrowid
         cursor.close()
         conn.close()
         
-        return True, exercise_id, name
+        return True, f'User {user_id} - Gym {gym_id}', 'gym_member'
         
     except pymysql.Error as e:
         return False, None, f'Database error: {str(e)}'
@@ -91,22 +82,24 @@ def main():
     print_header()
     
     form = cgi.FieldStorage()
-    success, exercise_id, message = add_exercise(form)
+    success, record_id, message = add_gym_member(form)
     
-    print_html_start('Exercise Result')
+    print_html_start('Gym Member Result')
     
     if success:
         print(f'''
             <section class="feedback-section">
                 <div class="success-message">
-                    <h1>✅ Exercise Added Successfully!</h1>
+                    <h1>✅ Gym Membership Added Successfully!</h1>
                     <div class="feedback-details">
-                        <p><strong>Exercise ID:</strong> {exercise_id}</p>
-                        <p><strong>Name:</strong> {message}</p>
-                        <p><strong>Category:</strong> {form.getvalue('category', 'N/A')}</p>
+                        <p><strong>Link:</strong> {record_id}</p>
+                        <p><strong>Membership ID:</strong> {form.getvalue('membership_id', 'N/A')}</p>
+                        <p><strong>Type:</strong> {form.getvalue('membership_type', 'N/A')}</p>
+                        <p><strong>Start Date:</strong> {form.getvalue('start_date', '')}</p>
+                        <p><strong>End Date:</strong> {form.getvalue('end_date', 'N/A')}</p>
                     </div>
                     <div class="feedback-actions">
-                        <a href="/~azinovev/forms/add_exercise.html" class="btn-primary">Add Another Exercise</a>
+                        <a href="/~azinovev/forms/add_gym_member.html" class="btn-primary">Add Another Membership</a>
                         <a href="/~azinovev/maintenance.html" class="btn-secondary">Back to Maintenance</a>
                     </div>
                 </div>
@@ -116,7 +109,7 @@ def main():
         print(f'''
             <section class="feedback-section">
                 <div class="error-message">
-                    <h1>❌ Error Adding Exercise</h1>
+                    <h1>❌ Error Adding Gym Membership</h1>
                     <div class="feedback-details">
                         <p><strong>Error:</strong> {message}</p>
                     </div>

@@ -1,4 +1,3 @@
-Executing command on clabsql.clamv.constructor.university: cat ~/public_html/add_gym.py
 #!/usr/bin/python3
 print('Content-Type: text/html; charset=utf-8')
 print()

@@ -34,41 +34,36 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 │       ├── fittrack-pro-logo.svg     # Brand logo
 │       ├── logo-demo.html            # Logo demonstration
 │       └── color-palette.html        # Color palette visualization
-├── fittrack_app/                      # Assignment 5: Flask Web Application
-│   ├── app.py                         # Main Flask application with all 9 routes
-│   ├── config.py                      # Database configuration
-│   ├── requirements.txt               # Python dependencies
-│   ├── README.md                      # Flask app documentation
-│   ├── static/                        # Static assets
-│   │   ├── css/style.css             # Corporate Design CSS
-│   │   └── img/fittrack-pro-logo.svg # Brand logo
-│   └── templates/                     # Jinja2 templates
-│       ├── base.html                  # Base template with navigation
-│       ├── index.html                 # Homepage (Flask version)
-│       ├── imprint.html               # Legal page (Flask version)
-│       ├── maintenance.html           # Data management hub
-│       ├── 404.html                   # Error page
-│       ├── entities/                  # Entity forms (6 forms + feedback)
-│       └── relationships/             # Relationship forms (3 forms + feedback)
-├── fittrack_cgi/                      # Assignment 5: CGI Implementation (Alternative)
-│   ├── cgi-bin/                       # Python CGI scripts (9 total)
-│   │   ├── add_user.cgi              # User insertion script
-│   │   ├── add_gym.cgi               # Gym insertion script
-│   │   ├── add_workout.cgi           # Workout insertion script
-│   │   ├── add_exercise.cgi          # Exercise insertion script
-│   │   ├── add_class.cgi             # Class insertion script
-│   │   ├── add_progress.cgi          # Progress tracking script
-│   │   ├── add_workout_exercise.cgi  # Workout-Exercise link script
-│   │   ├── add_class_booking.cgi     # Class booking script
-│   │   └── add_gym_member.cgi        # Gym member script
-│   ├── forms/                         # HTML forms (9 total)
+├── fittrack_cgi/                      # Assignments 5 & 6: CGI Web Application
+│   ├── *.py                           # Python CGI scripts (12 total)
+│   │   ├── add_user.py               # HW5: User insertion script
+│   │   ├── add_gym.py                # HW5: Gym insertion script
+│   │   ├── add_workout.py            # HW5: Workout insertion script
+│   │   ├── add_exercise.py           # HW5: Exercise insertion script
+│   │   ├── add_class.py              # HW5: Class insertion script
+│   │   ├── add_progress.py           # HW5: Progress tracking script
+│   │   ├── add_workout_exercise.py   # HW5: Workout-Exercise link script
+│   │   ├── add_class_booking.py      # HW5: Class booking script
+│   │   ├── add_gym_member.py         # HW5: Gym member script
+│   │   ├── get_data.py               # HW5: AJAX data provider
+│   │   ├── search_user_activity.py   # HW6: User activity search
+│   │   └── user_detail.py            # HW6: User detail page
+│   ├── forms/                         # HTML forms (12 total)
+│   │   ├── add_*.html                # HW5: 9 data entry forms
+│   │   ├── search_hub.html           # HW6: Search landing page
+│   │   ├── search_user_activity.html # HW6: User activity search
+│   │   └── search_gym_members.html   # HW6: Gym member search (in progress)
 │   ├── css/                           # Corporate Design CSS
 │   ├── img/                           # Brand assets
 │   ├── index.html                     # Homepage
 │   ├── maintenance.html               # Data management hub
 │   ├── imprint.html                   # Legal page
 │   ├── README.md                      # CGI implementation documentation
-│   └── QUICK_START.md                 # Quick deployment guide
+│   └── DEPLOYMENT_INSTRUCTIONS.md     # Complete deployment guide
+├── HW6/                               # Assignment 6: Search Functionality
+│   ├── HW6_Search_Implementation_Plan.md  # Search implementation plan
+│   ├── generate_test_data.sql         # Test data generation script
+│   └── add_workouts_for_existing_users.sql  # Additional workout data
 ├── fittrack_schema.sql                # Assignment 2: Database schema implementation
 ├── FitTrack Pro - ER Diagram.pdf     # Visual ER Diagram
 └── README.md                          # This file
@@ -141,40 +136,57 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 
 ### 📋 Assignment 5 - Web Application with Database Integration ✅
 - **Team Collaboration:** All members contributing forms
-- **Technology Stack:** Python (Flask + CGI) + MariaDB + Corporate Design CSS
-- **Two Implementations:**
+- **Technology Stack:** Python CGI + PyMySQL + MariaDB + Corporate Design CSS
+- **Location:** `fittrack_cgi/` directory
 
-#### Flask Application (`fittrack_app/`)
-- **Technology:** Modern Python Flask framework with SQLAlchemy ORM
-- **Features:** 
-  - Dynamic templates with Jinja2
-  - Session management and error handling
-  - RESTful routing structure
-  - Development server for local testing
-- **Files:**
-  - `app.py` - Main Flask application with all 9 routes
-  - `config.py` - Database configuration for MariaDB
-  - `requirements.txt` - Python dependencies
-  - `templates/` - Jinja2 templates with Corporate Design
-  - `static/` - CSS and images from Assignment 4
-
-#### CGI Implementation (`fittrack_cgi/`) - Deployable on ClamV
-- **Technology:** Python CGI scripts with PyMySQL (no mod_wsgi required)
+#### CGI Implementation
+- **Technology:** Python 3.6+ CGI scripts with PyMySQL
 - **Features:**
   - Direct database connection to MariaDB on clabsql server
   - Works without admin privileges or mod_wsgi
-  - All 9 forms actually insert data into database
-  - Deployable to university server immediately
+  - All 9 forms insert data into database
+  - Dynamic feedback pages
+  - AJAX data loading for dropdowns
+  - Deployed on ClamV server
 - **Files:**
-  - `cgi-bin/` - 9 executable Python CGI scripts
-  - `forms/` - 9 HTML forms pointing to CGI scripts
+  - `*.py` - 9 executable Python CGI scripts (in root directory)
+  - `forms/` - 9 HTML forms with database integration
+  - `get_data.py` - AJAX endpoint for dynamic dropdowns
   - `README.md` - CGI implementation documentation
-  - `QUICK_START.md` - Deployment guide
+  - `DEPLOYMENT_INSTRUCTIONS.md` - Complete deployment guide
 
 #### Work Distribution:
 - **Aleksandr Zinovev:** User forms, Progress Tracking, Workout-Exercise relationships
 - **Siwoo Lee:** Gym forms, Class forms, Class booking relationships  
 - **Arslan Ahmet Berk:** Exercise forms, Workout forms, Gym member relationships
+
+### 📋 Assignment 6 - Search Functionality 🚧 IN PROGRESS
+- **Team Collaboration:** Each member implements one search feature
+- **Technology Stack:** Python CGI + PyMySQL + MariaDB
+- **Location:** `fittrack_cgi/` directory + `HW6/` for documentation
+
+#### Search Features
+1. **User Activity Analysis** (Aleksandr) ✅ **COMPLETED**
+   - Search by user type, date range, activity metrics
+   - Results page with user groups and statistics
+   - Individual user detail pages with workout history
+   
+2. **Gym Member Management** (Lee) 🚧 **IN PROGRESS**
+   - Search by gym, membership type, status
+   - Member listing with gym information
+   
+3. **Exercise Performance** (Arslan) 📋 **PLANNED**
+   - Search by exercise type, performance metrics
+   - Session frequency analysis
+
+#### Files:
+- `search_user_activity.py` - User activity search CGI (Aleksandr) ✅
+- `user_detail.py` - User detail page CGI (Aleksandr) ✅
+- `forms/search_hub.html` - Search landing page ✅
+- `forms/search_user_activity.html` - User activity search form ✅
+- `forms/search_gym_members.html` - Gym member search form 🚧
+- `HW6/HW6_Search_Implementation_Plan.md` - Implementation plan ✅
+- `HW6/*.sql` - Test data generation scripts ✅
 
 ## System Features
 
@@ -208,7 +220,8 @@ Based on the 3 ISA hierarchies in our database design:
 - **Assignment 2:** Relational Mapping ✅ **COMPLETED**
 - **Assignment 3:** Database Implementation ✅ **COMPLETED**
 - **Assignment 4:** Website Implementation ✅ **COMPLETED**
-- **Assignment 5:** Flask Web Application ✅ **COMPLETED**
+- **Assignment 5:** CGI Web Application ✅ **COMPLETED**
+- **Assignment 6:** Search Functionality 🚧 **IN PROGRESS** (Aleksandr's part complete)
 
 ## Contact
 

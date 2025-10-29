@@ -1,8 +1,7 @@
-Executing command on clabsql.clamv.constructor.university: cat ~/public_html/add_workout.py
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 """
-CGI Script to add a new workout session
+CGI Script to add progress tracking entry
 """
 
 import cgi
@@ -80,29 +79,29 @@ def print_html_end():
 </body>
 </html>""")
 
-def add_workout(form_data):
-    """Add workout to database"""
+def add_progress(form_data):
+    """Add progress entry to database"""
     try:
         conn = pymysql.connect(**DB_CONFIG)
         cursor = conn.cursor()
         
         user_id = form_data.getvalue('user_id', '')
-        workout_name = form_data.getvalue('workout_name', '')
         date = form_data.getvalue('date', '')
-        duration = form_data.getvalue('duration', None)
-        calories_burned = form_data.getvalue('calories_burned', None)
-        notes = form_data.getvalue('notes', None)
+        weight = form_data.getvalue('weight', None)
+        body_fat_percentage = form_data.getvalue('body_fat_percentage', None)
+        muscle_mass = form_data.getvalue('muscle_mass', None)
+        measurements = form_data.getvalue('measurements', None)
         
         # Validate required fields
-        if not all([user_id, workout_name, date]):
+        if not all([user_id, date]):
             raise ValueError("Missing required fields")
         
         # Insert data
         sql = """
-            INSERT INTO workout (user_id, workout_name, date, duration, calories_burned, notes)
+            INSERT INTO progress_tracking (user_id, date, weight, body_fat_percentage, muscle_mass, measurements)
             VALUES (%s, %s, %s, %s, %s, %s)
         """
-        cursor.execute(sql, (user_id, workout_name, date, duration if duration else None, calories_burned if calories_burned else None, notes if notes else None))
+        cursor.execute(sql, (user_id, date, weight if weight else None, body_fat_percentage if body_fat_percentage else None, muscle_mass if muscle_mass else None, measurements if measurements else None))
         conn.commit()
         
         result_id = cursor.lastrowid
@@ -110,7 +109,7 @@ def add_workout(form_data):
         cursor.close()
         conn.close()
         
-        return True, result_id, "Workout added"
+        return True, result_id, "Progress Entry added"
         
     except pymysql.Error as e:
         return False, None, f"Database error: {str(e)}"
@@ -121,23 +120,23 @@ def add_workout(form_data):
 def main():
     print_header()
     form = cgi.FieldStorage()
-    success, result_id, message = add_workout(form)
+    success, result_id, message = add_progress(form)
     
-    print_html_start("Workout Result")
+    print_html_start("Progress Entry Result")
     
     if success:
         print(f"""
             <section class="feedback-section">
                 <div class="success-message">
-                    <h1>✅ Workout Added Successfully!</h1>
+                    <h1>✅ Progress Entry Added Successfully!</h1>
                     <div class="feedback-details">
                         <p><strong>ID:</strong> {result_id}</p>
                         <p><strong>User Id:</strong> {form.getvalue("user_id", "N/A")}</p>
-                        <p><strong>Workout Name:</strong> {form.getvalue("workout_name", "N/A")}</p>
                         <p><strong>Date:</strong> {form.getvalue("date", "N/A")}</p>
+                        <p><strong>Weight:</strong> {form.getvalue("weight", "N/A")}</p>
                     </div>
                     <div class="feedback-actions">
-                        <a href="/~azinovev/forms/add_workout.html" class="btn-primary">Add Another Workout</a>
+                        <a href="/~azinovev/forms/add_progress.html" class="btn-primary">Add Another Progress Entry</a>
                         <a href="/~azinovev/maintenance.html" class="btn-secondary">Back to Maintenance</a>
                     </div>
                 </div>
@@ -147,7 +146,7 @@ def main():
         print(f"""
             <section class="feedback-section">
                 <div class="error-message">
-                    <h1>❌ Error Adding Workout</h1>
+                    <h1>❌ Error Adding Progress Entry</h1>
                     <div class="feedback-details">
                         <p><strong>Error:</strong> {message}</p>
                     </div>

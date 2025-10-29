@@ -1,17 +1,12 @@
-Executing command on clabsql.clamv.constructor.university: cat ~/public_html/add_user.py
 #!/usr/bin/python3
 print('Content-Type: text/html; charset=utf-8')
 print()
 
-# Import basic modules first
 import cgi
 import sys
 from datetime import datetime
-
-# Import pymysql (should work now with local copy)
 import pymysql
 
-# Database configuration
 DB_CONFIG = {
     'host': 'localhost',
     'user': 'azinovev',
@@ -75,67 +70,55 @@ def print_html_end():
 </body>
 </html>''')
 
-def add_user(form_data):
+def add_workout_exercise(form_data):
     try:
-        # Connect to database
         conn = pymysql.connect(**DB_CONFIG)
         cursor = conn.cursor()
         
-        # Get form data
-        username = form_data.getvalue('username', '')
-        email = form_data.getvalue('email', '')
-        password_hash = form_data.getvalue('password_hash', '')
-        first_name = form_data.getvalue('first_name', '')
-        last_name = form_data.getvalue('last_name', '')
-        date_of_birth = form_data.getvalue('date_of_birth', None)
-        gender = form_data.getvalue('gender', None)
+        workout_id = form_data.getvalue('workout_id', '')
+        exercise_id = form_data.getvalue('exercise_id', '')
+        sets = form_data.getvalue('sets', '')
+        reps = form_data.getvalue('reps', '')
+        weight = form_data.getvalue('weight', '')
         
-        # Validate required fields
-        if not all([username, email, password_hash, first_name, last_name]):
+        if not all([workout_id, exercise_id]):
             raise ValueError("Missing required fields")
         
-        # Insert user
-        sql = """
-            INSERT INTO user (username, email, password_hash, first_name, last_name, 
-                            date_of_birth, gender)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)
-        """
-        cursor.execute(sql, (username, email, password_hash, first_name, last_name, 
-                           date_of_birth if date_of_birth else None, 
-                           gender if gender else None))
+        sql = "INSERT INTO workout_exercise (workout_id, exercise_id, sets, reps, weight) VALUES (%s, %s, %s, %s, %s)"
+        cursor.execute(sql, (workout_id, exercise_id, 
+                           sets if sets else None, 
+                           reps if reps else None, 
+                           weight if weight else None))
         conn.commit()
-        
-        user_id = cursor.lastrowid
         
         cursor.close()
         conn.close()
         
-        return True, user_id, username
+        return True, f"Workout {workout_id} - Exercise {exercise_id}", "workout_exercise"
         
     except pymysql.Error as e:
         return False, None, f"Database error: {str(e)}"
     except Exception as e:
         return False, None, f"Error: {str(e)}"
 
-# Main execution
 form = cgi.FieldStorage()
-success, user_id, message = add_user(form)
+success, record_id, message = add_workout_exercise(form)
 
-print_html_start("Add User Result")
+print_html_start("Add Workout Exercise Result")
 
 if success:
     print(f'''
         <section class="feedback-section">
             <div class="success-message">
-                <h1>✅ User Added Successfully!</h1>
+                <h1>✅ Workout Exercise Added Successfully!</h1>
                 <div class="feedback-details">
-                    <p><strong>User ID:</strong> {user_id}</p>
-                    <p><strong>Username:</strong> {message}</p>
-                    <p><strong>Email:</strong> {form.getvalue('email', '')}</p>
-                    <p><strong>Name:</strong> {form.getvalue('first_name', '')} {form.getvalue('last_name', '')}</p>
+                    <p><strong>Link:</strong> {record_id}</p>
+                    <p><strong>Sets:</strong> {form.getvalue('sets', 'N/A')}</p>
+                    <p><strong>Reps:</strong> {form.getvalue('reps', 'N/A')}</p>
+                    <p><strong>Weight:</strong> {form.getvalue('weight', 'N/A')}</p>
                 </div>
                 <div class="feedback-actions">
-                    <a href="/~azinovev/forms/add_user.html" class="btn-primary">Add Another User</a>
+                    <a href="/~azinovev/forms/add_workout_exercise.html" class="btn-primary">Add Another Exercise</a>
                     <a href="/~azinovev/maintenance.html" class="btn-secondary">Back to Maintenance</a>
                 </div>
             </div>
@@ -145,7 +128,7 @@ else:
     print(f'''
         <section class="feedback-section">
             <div class="error-message">
-                <h1>❌ Error Adding User</h1>
+                <h1>❌ Error Adding Workout Exercise</h1>
                 <div class="feedback-details">
                     <p><strong>Error:</strong> {message}</p>
                 </div>

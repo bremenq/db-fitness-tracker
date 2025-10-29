@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Member Search - FitTrack Pro</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../img/fittrack-pro-logo.svg" alt="FitTrack Pro" height="40">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#features">Features</a></li>
+                    <li><a href="../maintenance.html">Maintenance</a></li>
+                    <li><a href="search_hub.html" class="active">Search</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                    <li><a href="../imprint.html">Imprint</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="form-section">
+                <h1>🏋️ Gym Member Search</h1>
+                <a href="search_hub.html" class="back-link">← Back to Search Hub</a>
+
+                <div class="search-description">
+                    <p>Search and manage gym members, their memberships, and associated gym information. 
+                    Find members by gym location, membership type, and view their progress tracking data.</p>
+                </div>
+
+                <form method="GET" action="../cgi-bin/search_gym_members.py" class="entity-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="gym_id">Filter by Gym</label>
+                            <select id="gym_id" name="gym_id">
+                                <option value="">-- All Gyms --</option>
+                            </select>
+                            <small class="form-help-text">Select a specific gym or leave empty for all</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="membership_type">Membership Type</label>
+                            <select id="membership_type" name="membership_type">
+                                <option value="">-- All Types --</option>
+                                <option value="Basic">Basic</option>
+                                <option value="Premium">Premium</option>
+                                <option value="VIP">VIP</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="start_date_from">Membership Start From</label>
+                            <input type="date" id="start_date_from" name="start_date_from">
+                            <small class="form-help-text">Filter members who joined after this date</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="start_date_to">Membership Start To</label>
+                            <input type="date" id="start_date_to" name="start_date_to">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="min_progress_records">Minimum Progress Records</label>
+                            <input type="number" id="min_progress_records" name="min_progress_records" 
+                                   min="0" max="100" placeholder="e.g., 2">
+                            <small class="form-help-text">Find members with at least this many progress entries</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sort_by">Sort Results By</label>
+                            <select id="sort_by" name="sort_by">
+                                <option value="gym_name ASC">Gym Name (A-Z)</option>
+                                <option value="gym_name DESC">Gym Name (Z-A)</option>
+                                <option value="member_name ASC">Member Name (A-Z)</option>
+                                <option value="start_date DESC">Newest Members First</option>
+                                <option value="start_date ASC">Oldest Members First</option>
+                                <option value="progress_records DESC">Most Progress Records</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">🔍 Search Gym Members</button>
+                        <a href="search_hub.html" class="btn-secondary">Cancel</a>
+                    </div>
+                </form>
+
+                <div class="form-help">
+                    <h3>💡 Search Tips:</h3>
+                    <ul>
+                        <li><strong>Gym Filter:</strong> Select a specific gym to see only its members</li>
+                        <li><strong>Membership Type:</strong> Filter by Basic, Premium, or VIP memberships</li>
+                        <li><strong>Date Range:</strong> Find members who joined within a specific period</li>
+                        <li><strong>Progress Records:</strong> Identify active members with regular progress tracking</li>
+                        <li><strong>Leave filters empty</strong> to see all gym members in the system</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>FitTrack<span class="highlight">Pro</span></h3>
+                    <p>Database Systems Project 2025</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Development Team</h4>
+                    <p>Aleksandr Zinovev<br>
+                    Siwoo Lee<br>
+                    Arslan Ahmet Berk</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FitTrack Pro. Database Systems Course Project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Load gyms dynamically
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('../get_data.py?type=gyms')
+                .then(response => response.json())
+                .then(data => {
+                    const gymSelect = document.getElementById('gym_id');
+                    data.gyms.forEach(gym => {
+                        const option = document.createElement('option');
+                        option.value = gym.gym_id;
+                        option.textContent = gym.name;
+                        gymSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error loading gyms:', error));
+        });
+    </script>
+</body>
+</html>
+
