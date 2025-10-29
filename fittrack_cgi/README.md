@@ -1,6 +1,3 @@
-Executing command on clabsql.clamv.constructor.university: 
-cat ~/public_html/README.md
-
 # FitTrack Pro - Static HTML Deployment
 
 This directory contains the static HTML version of the FitTrack Pro web application for Assignment 5.

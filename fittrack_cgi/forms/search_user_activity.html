@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Activity Search - FitTrack Pro</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../img/fittrack-pro-logo.svg" alt="FitTrack Pro" height="40">
+                <h1>FitTrack<span class="highlight">Pro</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#features">Features</a></li>
+                    <li><a href="../maintenance.html">Maintenance</a></li>
+                    <li><a href="search_hub.html" class="active">Search</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                    <li><a href="../imprint.html">Imprint</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="form-section">
+                <h1>👥 User Activity Search</h1>
+                <a href="search_hub.html" class="back-link">← Back to Search Hub</a>
+
+                <div class="search-description">
+                    <p>Analyze user types and their workout activity patterns. This search helps you understand 
+                    how different user categories (Individual Users, Gym Members, Staff) engage with the fitness system.</p>
+                </div>
+
+                <form method="GET" action="../search_user_activity.py" class="entity-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="user_type">User Type Filter</label>
+                            <select id="user_type" name="user_type">
+                                <option value="">-- All User Types --</option>
+                                <option value="Individual User">Individual User</option>
+                                <option value="Gym Member">Gym Member</option>
+                                <option value="Staff">Staff</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="min_users">Minimum Users in Group</label>
+                            <input type="number" id="min_users" name="min_users" min="1" max="100" value="1"
+                                   placeholder="e.g., 2">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date_from">Workout Date From</label>
+                            <input type="date" id="date_from" name="date_from">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date_to">Workout Date To</label>
+                            <input type="date" id="date_to" name="date_to">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="min_calories">Minimum Average Calories</label>
+                            <input type="number" id="min_calories" name="min_calories" min="0" max="5000" step="10"
+                                   placeholder="e.g., 200">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sort_by">Sort Results By</label>
+                            <select id="sort_by" name="sort_by">
+                                <option value="total_users">Total Users (Default)</option>
+                                <option value="total_workouts">Total Workouts</option>
+                                <option value="avg_calories">Average Calories</option>
+                                <option value="user_type">User Type</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">🔍 Search User Activity</button>
+                        <button type="reset" class="btn-secondary">🔄 Reset Form</button>
+                    </div>
+                </form>
+
+                <div class="form-help">
+                    <h3>💡 Search Tips:</h3>
+                    <ul>
+                        <li><strong>User Type:</strong> Filter by specific user category or leave blank for all types</li>
+                        <li><strong>Minimum Users:</strong> Only show groups with at least this many users</li>
+                        <li><strong>Date Range:</strong> Filter workouts within specific date range (optional)</li>
+                        <li><strong>Calories Filter:</strong> Only show groups with average calories above this threshold</li>
+                        <li><strong>Sorting:</strong> Choose how to order your results</li>
+                    </ul>
+                    
+                    <h3>📊 What You'll See:</h3>
+                    <ul>
+                        <li><strong>User Type:</strong> Category of users (Individual, Gym Member, Staff)</li>
+                        <li><strong>Total Users:</strong> Number of users in this category</li>
+                        <li><strong>Total Workouts:</strong> Number of workouts performed by this group</li>
+                        <li><strong>Average Calories:</strong> Average calories burned per workout</li>
+                        <li><strong>Detail Links:</strong> Click any result to see individual users in that category</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>FitTrack<span class="highlight">Pro</span></h3>
+                    <p>Database Systems Project 2025</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Development Team</h4>
+                    <p>Aleksandr Zinovev<br>
+                    Siwoo Lee<br>
+                    Arslan Ahmet Berk</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FitTrack Pro. Database Systems Course Project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set default date range to last 30 days
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const thirtyDaysAgo = new Date(today.getTime() - (30 * 24 * 60 * 60 * 1000));
+            
+            document.getElementById('date_to').value = today.toISOString().split('T')[0];
+            document.getElementById('date_from').value = thirtyDaysAgo.toISOString().split('T')[0];
+        });
+    </script>
+</body>
+</html>
