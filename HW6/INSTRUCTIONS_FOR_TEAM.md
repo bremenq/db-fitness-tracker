@@ -72,7 +72,7 @@ This file contains:
 - 📝 Suggested implementation steps
 - 💡 Database queries to use
 
-### Step 3: Study My Implementation (Aleksandr's completed work)
+### Step 3: Study My Implementation (open to improvement suggestions!)
 
 **Look at these 3 files to understand the pattern:**
 
@@ -132,22 +132,24 @@ This file contains:
 
 You can test the HTML forms locally by opening them in a browser, but the CGI scripts need to be on the server to work.
 
-### Step 6: Deploy to ClamV Server
+### Step 6: Deploy to Your ClamV Server
 
-Follow the instructions in: **`fittrack_cgi/DEPLOYMENT_INSTRUCTIONS.md`**
+**Full deployment guide:** See **`fittrack_cgi/DEPLOYMENT_INSTRUCTIONS.md`** for complete instructions.
 
-Quick deploy command:
+**Quick deploy command:**
 ```bash
 cd fittrack_cgi
 
-# Set your credentials
+# Set your credentials (use YOUR ClamV username and password)
 USERNAME="your_username"
 PASSWORD="your_password"
 
-# Deploy everything
+# Deploy everything to YOUR server
 sshpass -p "$PASSWORD" scp -r ./* ${USERNAME}@clabsql.clamv.constructor.university:~/public_html/ && \
 sshpass -p "$PASSWORD" ssh ${USERNAME}@clabsql.clamv.constructor.university "chmod +x ~/public_html/*.py"
 ```
+
+**Note:** Each team member should deploy to their own ClamV server for testing. You'll have your own database and can test independently!
 
 ### Step 7: Test on Server
 
