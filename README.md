@@ -215,9 +215,9 @@ Based on the 3 ISA hierarchies in our database design:
 ## Contact
 
 For questions about this project, contact any team member:
-- **Aleksandr Zinovev** - User hierarchy lead | Website implementation ✅ **HW3 & HW4 Complete**
-- **Siwoo Lee** - Staff hierarchy lead ✅ **HW3 Complete**
-- **Arslan Ahmet Berk** - Exercise hierarchy lead ✅ **HW3 Complete**
+- **Aleksandr Zinovev** - User hierarchy lead | Website implementation
+- **Siwoo Lee** - Staff hierarchy lead
+- **Arslan Ahmet Berk** - Exercise hierarchy lead
 
 ---
 
