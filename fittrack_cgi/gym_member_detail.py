@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
+# ❌ WRONG FILENAME: This file should be named 'member_detail.py' not 'gym_member_detail.py'
+# The search results link to 'member_detail.py'
+# ISSUE: Wrong Python library - should use pymysql, not mysql.connector
 import cgi
-import mysql.connector
+import mysql.connector  # ❌ WRONG: Use pymysql instead
 import cgitb
 cgitb.enable()
 
@@ -14,20 +17,23 @@ if not user_id:
     exit()
 
 # Connect to database
+# ❌ ISSUE: Wrong library and exposed credentials
 conn = mysql.connector.connect(
     host="localhost",
-    user="enter_username",
-    password="enter_password",
-    database="enter_database name"
+    user="enter_username",  # ❌ Should be masked in repo
+    password="enter_password",  # ❌ SECURITY: Mask with **** in repo
+    database="enter_database name"  # ❌ Should be masked in repo
 )
 cursor = conn.cursor(dictionary=True)
 
+# ❌ CRITICAL: Table names are WRONG - SQL is case-sensitive on our server
+# Our schema from HW2 uses lowercase: user, gym, gym_member (not USER, GYM, GYM_MEMBER)
 query = """
 SELECT u.user_id, u.first_name, u.last_name, u.email, u.date_of_birth,
        g.name AS gym_name, g.address, gm.membership_type, gm.start_date, gm.end_date
-FROM USER u
-JOIN GYM_MEMBER gm ON u.user_id = gm.user_id
-JOIN GYM g ON gm.gym_id = g.gym_id
+FROM USER u  -- ❌ WRONG: Should be 'user' (lowercase)
+JOIN GYM_MEMBER gm ON u.user_id = gm.user_id  -- ❌ WRONG: Should be 'gym_member'
+JOIN GYM g ON gm.gym_id = g.gym_id  -- ❌ WRONG: Should be 'gym'
 WHERE u.user_id = %s
 """
 cursor.execute(query, (user_id,))
