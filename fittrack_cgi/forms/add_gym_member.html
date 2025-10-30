@@ -38,7 +38,6 @@
                 <label for="user_id">Select User *</label>
                 <select id="user_id" name="user_id" required>
                     <option value="">-- Select User --</option>
-                    <option value="1">demo_user (Demo User)</option>
                 </select>
             </div>
 
@@ -46,7 +45,6 @@
                 <label for="gym_id">Select Gym *</label>
                 <select id="gym_id" name="gym_id" required>
                     <option value="">-- Select Gym --</option>
-                    <option value="1">Demo Gym (123 Main St)</option>
                 </select>
             </div>
         </div>
@@ -118,11 +116,36 @@
     </footer>
 
     <script>
-        function showDemo(event, entityType) {
-            event.preventDefault();
-            alert('Demo Mode: In the full Flask application, this ' + entityType + ' would be saved to the database.\n\nFor the working version, run the Flask app locally:\ncd fittrack_app && python app.py');
-            return false;
-        }
+        // Load users and gyms from database
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load users
+            fetch('../get_data.py?type=users')
+                .then(response => response.json())
+                .then(data => {
+                    const userSelect = document.getElementById('user_id');
+                    data.forEach(user => {
+                        const option = document.createElement('option');
+                        option.value = user.user_id;
+                        option.textContent = `${user.first_name} ${user.last_name} (${user.email})`;
+                        userSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error loading users:', error));
+
+            // Load gyms
+            fetch('../get_data.py?type=gyms')
+                .then(response => response.json())
+                .then(data => {
+                    const gymSelect = document.getElementById('gym_id');
+                    data.forEach(gym => {
+                        const option = document.createElement('option');
+                        option.value = gym.gym_id;
+                        option.textContent = `${gym.name} (${gym.location})`;
+                        gymSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error loading gyms:', error));
+        });
     </script>
 </body>
 </html>

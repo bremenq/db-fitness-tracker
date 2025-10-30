@@ -13,9 +13,9 @@ import pymysql
 # Database configuration
 DB_CONFIG = {
     'host': 'localhost',
-    'user': 'your_username',
+    'user': 'azinovev',
     'password': '****',
-    'database': 'db_your_username',
+    'database': 'db_azinovev',
     'charset': 'utf8mb4'
 }
 

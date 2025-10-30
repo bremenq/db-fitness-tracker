@@ -9,9 +9,9 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'pymysql'))
 
 DB_CONFIG = {
     'host': 'localhost',
-    'user': 'your_username',
+    'user': 'azinovev',
     'password': '****',
-    'database': 'db_your_username'
+    'database': 'db_azinovev'
 }
 
 def get_users():

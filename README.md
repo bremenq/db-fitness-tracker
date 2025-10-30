@@ -46,13 +46,18 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 │   │   ├── add_class_booking.py      # HW5: Class booking script
 │   │   ├── add_gym_member.py         # HW5: Gym member script
 │   │   ├── get_data.py               # HW5: AJAX data provider
-│   │   ├── search_user_activity.py   # HW6: User activity search
-│   │   └── user_detail.py            # HW6: User detail page
-│   ├── forms/                         # HTML forms (12 total)
+│   │   ├── search_user_activity.py   # HW6: User activity search (Aleksandr)
+│   │   ├── user_detail.py            # HW6: User detail page (Aleksandr)
+│   │   ├── search_gym_members.py     # HW6: Gym member search (Lee)
+│   │   ├── member_detail.py          # HW6: Member detail page (Lee)
+│   │   ├── search_exercise_performance.py  # HW6: Exercise search (Arslan)
+│   │   └── exercise_detail.py        # HW6: Exercise detail page (Arslan)
+│   ├── forms/                         # HTML forms (13 total)
 │   │   ├── add_*.html                # HW5: 9 data entry forms
 │   │   ├── search_hub.html           # HW6: Search landing page
-│   │   ├── search_user_activity.html # HW6: User activity search
-│   │   └── search_gym_members.html   # HW6: Gym member search (in progress)
+│   │   ├── search_user_activity.html # HW6: User activity search (Aleksandr)
+│   │   ├── search_gym_members.html   # HW6: Gym member search (Lee)
+│   │   └── search_exercise_performance.html  # HW6: Exercise search (Arslan)
 │   ├── css/                           # Corporate Design CSS
 │   ├── img/                           # Brand assets
 │   ├── index.html                     # Homepage
@@ -149,33 +154,35 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 - **Siwoo Lee:** Gym forms, Class forms, Class booking relationships  
 - **Arslan Ahmet Berk:** Exercise forms, Workout forms, Gym member relationships
 
-### 📋 Assignment 6 - Search Functionality 🚧 IN PROGRESS
+### ✅ Assignment 6 - Search Functionality **COMPLETED**
 - **Team Collaboration:** Each member implements one search feature
 - **Technology Stack:** Python CGI + PyMySQL + MariaDB
 - **Location:** `fittrack_cgi/` directory + `HW6/` for documentation
 
-#### Search Features
+#### Search Features (All Completed!)
 1. **User Activity Analysis** (Aleksandr) ✅ **COMPLETED**
    - Search by user type, date range, activity metrics
    - Results page with user groups and statistics
    - Individual user detail pages with workout history
    
-2. **Gym Member Management** (Lee) 🚧 **IN PROGRESS**
-   - Search by gym, membership type, status
-   - Member listing with gym information
+2. **Gym Member Management** (Lee) ✅ **COMPLETED**
+   - Search by membership type, status, date range
+   - Member listing with membership details
+   - Individual member detail pages with workouts and bookings
    
-3. **Exercise Performance** (Arslan) 📋 **PLANNED**
-   - Search by exercise type, performance metrics
-   - Session frequency analysis
+3. **Exercise Performance** (Arslan) ✅ **COMPLETED**
+   - Search by category, difficulty, muscle groups
+   - Performance statistics and popularity metrics
+   - Exercise detail pages with top performers
 
 #### Files:
-- `search_user_activity.py` - User activity search CGI (Aleksandr) ✅
-- `user_detail.py` - User detail page CGI (Aleksandr) ✅
+- `search_user_activity.py` + `user_detail.py` - User search (Aleksandr) ✅
+- `search_gym_members.py` + `member_detail.py` - Gym member search (Lee) ✅
+- `search_exercise_performance.py` + `exercise_detail.py` - Exercise search (Arslan) ✅
 - `forms/search_hub.html` - Search landing page ✅
-- `forms/search_user_activity.html` - User activity search form ✅
-- `forms/search_gym_members.html` - Gym member search form 🚧
+- `forms/search_*.html` - All 3 search forms ✅
 - `HW6/HW6_Search_Implementation_Plan.md` - Implementation plan ✅
-- `HW6/*.sql` - Test data generation scripts ✅
+- `HW6/add_gym_members.sql` - Test data generation ✅
 
 ## System Features
 
@@ -210,7 +217,7 @@ Based on the 3 ISA hierarchies in our database design:
 - **Assignment 3:** Database Implementation ✅ **COMPLETED**
 - **Assignment 4:** Website Implementation ✅ **COMPLETED**
 - **Assignment 5:** CGI Web Application ✅ **COMPLETED**
-- **Assignment 6:** Search Functionality 🚧 **IN PROGRESS** (Aleksandr's part complete)
+- **Assignment 6:** Search Functionality ✅ **COMPLETED** (All 3 searches implemented)
 
 ## Contact
 
