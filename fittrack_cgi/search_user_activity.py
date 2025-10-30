@@ -12,9 +12,9 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'pymysql'))
 
 DB_CONFIG = {
     'host': 'localhost',
-    'user': 'your_username',
-    'password': '****',
-    'database': 'db_your_username',
+    'user': 'azinovev',
+    'password': 'WrtqlLcpgCPs0KGY',
+    'database': 'db_azinovev',
     'charset': 'utf8mb4'
 }
 
