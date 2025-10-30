@@ -40,8 +40,8 @@ def get_member_details(member_id):
                     ELSE 'Expired'
                 END as status
             FROM user u
-            JOIN gym_member gm ON u.user_id = gm.member_id
-            WHERE gm.member_id = %s
+            JOIN gym_member gm ON u.user_id = gm.user_id
+            WHERE gm.user_id = %s
         """, (member_id,))
         
         member = cursor.fetchone()
@@ -71,7 +71,7 @@ def get_member_details(member_id):
                 cb.booking_date
             FROM class_booking cb
             JOIN class c ON cb.class_id = c.class_id
-            WHERE cb.member_id = %s
+            WHERE cb.user_id = %s
             ORDER BY c.schedule_time DESC
             LIMIT 10
         """, (member_id,))

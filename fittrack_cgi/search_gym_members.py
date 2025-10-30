@@ -25,7 +25,7 @@ def get_search_results(params):
         
         query = """
             SELECT 
-                gm.member_id,
+                gm.user_id,
                 u.first_name,
                 u.last_name,
                 u.email,
@@ -38,7 +38,7 @@ def get_search_results(params):
                     ELSE 'Expired'
                 END as status
             FROM gym_member gm
-            JOIN user u ON gm.member_id = u.user_id
+            JOIN user u ON gm.user_id = u.user_id
             WHERE 1=1
         """
         
@@ -187,7 +187,7 @@ def main():
                             <td>{format_date(row['end_date'])}</td>
                             <td>{row['duration_days']}</td>
                             <td><span class="status-badge status-{status_class}">{row['status']}</span></td>
-                            <td><a href="member_detail.py?member_id={row['member_id']}" class="btn btn-small">View Details</a></td>
+                            <td><a href="member_detail.py?member_id={row['user_id']}" class="btn btn-small">View Details</a></td>
                         </tr>
             """)
         
