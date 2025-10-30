@@ -9,7 +9,7 @@ cgitb.enable()
 DB_CONFIG = {
     'host': 'localhost',
     'user': 'azinovev',
-    'password': 'WrtqlLcpgCPs0KGY',
+    'password': '****',
     'database': 'db_azinovev',
     'charset': 'utf8mb4'
 }
