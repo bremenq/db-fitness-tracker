@@ -9,9 +9,9 @@ cgitb.enable()
 # ====== We have to fill on these later because i cannot connect to the server ======
 DB_CONFIG = {
     'host': 'localhost',
-    'user': 'YOUR_USERNAME',         
-    'password': 'YOUR_PASSWORD',     
-    'database': 'db_YOUR_USERNAME',   
+    'user': 'aharslan',         
+    'password': '****',     
+    'database': 'db_aharslan',   
     'charset': 'utf8mb4',
     'cursorclass': pymysql.cursors.DictCursor
 }
