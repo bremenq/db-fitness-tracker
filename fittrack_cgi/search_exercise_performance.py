@@ -11,9 +11,9 @@ cgitb.enable()
 # I should fill them later because i can't access the server
 DB_CONFIG = {
     'host': 'localhost',
-    'user': 'YOUR_USERNAME',         
-    'password': 'YOUR_PASSWORD',      
-    'database': 'db_YOUR_USERNAME',   
+    'user': 'aharslan',         
+    'password': '****',      
+    'database': 'db_aharslan',   
     'charset': 'utf8mb4',
     'cursorclass': pymysql.cursors.DictCursor
 }
