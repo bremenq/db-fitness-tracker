@@ -1,82 +1,106 @@
 #!/usr/bin/python3
-import sys
 import pymysql
 import cgi
 import cgitb
+from html import escape
+from datetime import datetime
 
 cgitb.enable()
 
+# ====== FILL THESE ON THE SERVER LATER ======
+# I should fill them later because i can't access the server
 DB_CONFIG = {
     'host': 'localhost',
-    'user': 'azinovev',
-    'password': '****',
-    'database': 'db_azinovev',
-    'charset': 'utf8mb4'
+    'user': 'aharslan',         
+    'password': '****',      
+    'database': 'db_aharslan',   
+    'charset': 'utf8mb4',
+    'cursorclass': pymysql.cursors.DictCursor
 }
+# ============================================
 
 def print_header():
     print("Content-Type: text/html; charset=utf-8\n")
 
+def to_int(x):
+    try:
+        return int(x) if x and str(x).strip() != '' else None
+    except:
+        return None
+
+def to_float(x):
+    try:
+        return float(x) if x and str(x).strip() != '' else None
+    except:
+        return None
+
+def to_date_str(x):
+    if not x or str(x).strip() == "":
+        return None
+    try:
+        datetime.strptime(x, "%Y-%m-%d")
+        return x
+    except ValueError:
+        return None
+
 def get_search_results(params):
     try:
         conn = pymysql.connect(**DB_CONFIG)
-        cursor = conn.cursor(pymysql.cursors.DictCursor)
-        
-        query = """
-            SELECT 
-                e.exercise_id,
-                e.name as exercise_name,
-                e.category,
-                e.difficulty,
-                e.muscle_groups,
-                e.equipment_needed,
-                COUNT(DISTINCT we.workout_id) as total_workouts,
-                COUNT(DISTINCT w.user_id) as total_users,
-                AVG(we.sets) as avg_sets,
-                AVG(we.reps) as avg_reps,
-                AVG(we.weight) as avg_weight
-            FROM exercise e
-            LEFT JOIN workout_exercise we ON e.exercise_id = we.exercise_id
-            LEFT JOIN workout w ON we.workout_id = w.workout_id
-            WHERE 1=1
-        """
-        
-        query_params = []
-        
+        cur = conn.cursor()
+
+        query = [
+            "SELECT",
+            "  e.exercise_id,",
+            "  e.name AS exercise_name,",
+            "  e.category,",
+            "  e.difficulty,",
+            "  e.muscle_groups,",
+            "  e.equipment_needed,",
+            "  COUNT(DISTINCT we.workout_id) AS total_workouts,",
+            "  COUNT(DISTINCT w.user_id) AS total_users,",
+            "  AVG(we.sets) AS avg_sets,",
+            "  AVG(we.reps) AS avg_reps,",
+            "  AVG(we.weight) AS avg_weight",
+            "FROM exercise e",
+            "LEFT JOIN workout_exercise we ON e.exercise_id = we.exercise_id",
+            "LEFT JOIN workout w ON we.workout_id = w.workout_id",
+            "WHERE 1=1"
+        ]
+        q = []
+        # Filters
         if params.get('category'):
-            query += " AND e.category = %s"
-            query_params.append(params['category'])
-        
+            query.append("AND e.category = %s")
+            q.append(params['category'])
         if params.get('difficulty'):
-            query += " AND e.difficulty = %s"
-            query_params.append(params['difficulty'])
-        
+            query.append("AND e.difficulty = %s")
+            q.append(params['difficulty'])
         if params.get('muscle_group'):
-            query += " AND e.muscle_groups LIKE %s"
-            query_params.append(f"%{params['muscle_group']}%")
-        
-        query += " GROUP BY e.exercise_id, e.name, e.category, e.difficulty, e.muscle_groups, e.equipment_needed"
-        
-        if params.get('min_users'):
-            query += " HAVING COUNT(DISTINCT w.user_id) >= %s"
-            query_params.append(int(params['min_users']))
-        
-        if params.get('min_avg_sets'):
-            if params.get('min_users'):
-                query += " AND AVG(we.sets) >= %s"
-            else:
-                query += " HAVING AVG(we.sets) >= %s"
-            query_params.append(float(params['min_avg_sets']))
-        
-        if params.get('min_avg_reps'):
-            if params.get('min_users') or params.get('min_avg_sets'):
-                query += " AND AVG(we.reps) >= %s"
-            else:
-                query += " HAVING AVG(we.reps) >= %s"
-            query_params.append(float(params['min_avg_reps']))
-        
-        sort_by = params.get('sort_by', 'users_desc')
-        sort_mapping = {
+            query.append("AND e.muscle_groups LIKE %s")
+            q.append(f"%{params['muscle_group']}%")
+        if params.get('start_date'):
+            query.append("AND w.workout_date >= %s")
+            q.append(params['start_date'])
+        if params.get('end_date'):
+            query.append("AND w.workout_date <= %s")
+            q.append(params['end_date'])
+
+        # Group + Having
+        query.append("GROUP BY e.exercise_id, e.name, e.category, e.difficulty, e.muscle_groups, e.equipment_needed")
+        having = []
+        if params.get('min_users') is not None:
+            having.append("COUNT(DISTINCT w.user_id) >= %s")
+            q.append(params['min_users'])
+        if params.get('min_avg_sets') is not None:
+            having.append("AVG(we.sets) >= %s")
+            q.append(params['min_avg_sets'])
+        if params.get('min_avg_reps') is not None:
+            having.append("AVG(we.reps) >= %s")
+            q.append(params['min_avg_reps'])
+        if having:
+            query.append("HAVING " + " AND ".join(having))
+
+        # Sort
+        sort_map = {
             'users_desc': 'total_users DESC',
             'users_asc': 'total_users ASC',
             'avg_sets_desc': 'avg_sets DESC',
@@ -85,152 +109,96 @@ def get_search_results(params):
             'avg_reps_asc': 'avg_reps ASC',
             'name_asc': 'e.name ASC'
         }
-        query += f" ORDER BY {sort_mapping.get(sort_by, 'total_users DESC')}"
-        
-        cursor.execute(query, query_params)
-        results = cursor.fetchall()
-        
-        cursor.close()
+        query.append("ORDER BY " + sort_map.get(params.get('sort_by') or 'users_desc', 'total_users DESC'))
+
+        sql = "\n".join(query)
+        cur.execute(sql, q)
+        rows = cur.fetchall()
+        cur.close()
         conn.close()
-        
-        return results
-    except Exception as e:
+        return rows
+    except Exception:
         return None
 
 def main():
     print_header()
-    
     form = cgi.FieldStorage()
-    
     params = {
-        'category': form.getvalue('category', ''),
-        'difficulty': form.getvalue('difficulty', ''),
-        'muscle_group': form.getvalue('muscle_group', ''),
-        'min_users': form.getvalue('min_users', ''),
-        'min_avg_sets': form.getvalue('min_avg_sets', ''),
-        'min_avg_reps': form.getvalue('min_avg_reps', ''),
-        'sort_by': form.getvalue('sort_by', 'users_desc')
+        'category': (form.getvalue('category') or '').strip(),
+        'difficulty': (form.getvalue('difficulty') or '').strip(),
+        'muscle_group': (form.getvalue('muscle_group') or '').strip(),
+        'min_users': to_int(form.getvalue('min_users')),
+        'min_avg_sets': to_float(form.getvalue('min_avg_sets')),
+        'min_avg_reps': to_float(form.getvalue('min_avg_reps')),
+        'sort_by': (form.getvalue('sort_by') or 'users_desc').strip(),
+        'start_date': to_date_str(form.getvalue('start_date')),
+        'end_date': to_date_str(form.getvalue('end_date')),
     }
-    
+
     results = get_search_results(params)
-    
+
     print("""<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercise Performance Results - FitTrack Pro</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <title>Exercise Performance Results - FitTrack Pro</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <a href="index.html">
-                <img src="img/fittrack-pro-logo.svg" alt="FitTrack Pro Logo" class="logo">
-            </a>
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="maintenance.html">Forms</a>
-                <a href="forms/search_hub.html">Search</a>
-                <a href="imprint.html">Imprint</a>
-            </nav>
-        </div>
-    </header>
+  <h2>Exercise Performance Results</h2>
+""")
 
-    <main>
-        <div class="container">
-            <div class="navigation-actions">
-                <a href="forms/search_exercise_performance.html" class="btn btn-secondary">← Back to Search</a>
-                <a href="forms/search_hub.html" class="btn btn-secondary">Search Hub</a>
-            </div>
-
-            <h2>Exercise Performance Results</h2>
-    """)
-    
     if results is None:
-        print("""
-            <div class="error-message">
-                <p>An error occurred while searching. Please try again.</p>
-            </div>
-        """)
+        print("<p><strong>Note:</strong> Database is not reachable here (GitHub). This page will work on the ClamV server once credentials are set.</p>")
     elif len(results) == 0:
-        print("""
-            <div class="no-results">
-                <p>No exercises found matching your criteria.</p>
-                <p>Try adjusting your search filters.</p>
-            </div>
-        """)
+        print("<p>No exercises matched your filters.</p>")
     else:
-        print(f"""
-            <div class="results-summary">
-                <p>Found <strong>{len(results)}</strong> exercise(s)</p>
-            </div>
-
-            <div class="results-table">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Exercise Name</th>
-                            <th>Category</th>
-                            <th>Difficulty</th>
-                            <th>Muscle Groups</th>
-                            <th>Total Users</th>
-                            <th>Total Workouts</th>
-                            <th>Avg Sets</th>
-                            <th>Avg Reps</th>
-                            <th>Avg Weight</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-        """)
-        
-        for row in results:
-            avg_sets = f"{row['avg_sets']:.1f}" if row['avg_sets'] else 'N/A'
-            avg_reps = f"{row['avg_reps']:.1f}" if row['avg_reps'] else 'N/A'
-            avg_weight = f"{row['avg_weight']:.1f}" if row['avg_weight'] else 'N/A'
-            
-            print(f"""
-                        <tr>
-                            <td>{row['exercise_name']}</td>
-                            <td>{row['category']}</td>
-                            <td>{row['difficulty']}</td>
-                            <td>{row['muscle_groups'] if row['muscle_groups'] else 'N/A'}</td>
-                            <td>{row['total_users']}</td>
-                            <td>{row['total_workouts']}</td>
-                            <td>{avg_sets}</td>
-                            <td>{avg_reps}</td>
-                            <td>{avg_weight}</td>
-                            <td><a href="exercise_detail.py?exercise_id={row['exercise_id']}" class="btn btn-small">View Details</a></td>
-                        </tr>
-            """)
-        
+        print(f"<p>Found <strong>{len(results)}</strong> exercise(s).</p>")
         print("""
-                    </tbody>
-                </table>
-            </div>
-        """)
-    
-    print("""
-            <div class="search-help">
-                <h3>About This Search</h3>
-                <ul>
-                    <li><strong>Total Users:</strong> Number of unique users who performed this exercise</li>
-                    <li><strong>Total Workouts:</strong> Number of workouts including this exercise</li>
-                    <li><strong>Avg Sets/Reps/Weight:</strong> Average performance metrics across all users</li>
-                    <li>Click "View Details" to see complete exercise information and top performers</li>
-                </ul>
-            </div>
-        </div>
-    </main>
+<table class="data-table" border="1">
+  <thead>
+    <tr>
+      <th>Exercise Name</th>
+      <th>Category</th>
+      <th>Difficulty</th>
+      <th>Muscle Groups</th>
+      <th>Total Users</th>
+      <th>Total Workouts</th>
+      <th>Avg Sets</th>
+      <th>Avg Reps</th>
+      <th>Avg Weight</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+""")
+        for r in results:
+            print(f"""
+    <tr>
+      <td>{escape(r.get('exercise_name') or '')}</td>
+      <td>{escape(r.get('category') or '')}</td>
+      <td>{escape(r.get('difficulty') or '')}</td>
+      <td>{escape(r.get('muscle_groups') or 'N/A')}</td>
+      <td>{r.get('total_users') or 0}</td>
+      <td>{r.get('total_workouts') or 0}</td>
+      <td>{r.get('avg_sets') or 'N/A'}</td>
+      <td>{r.get('avg_reps') or 'N/A'}</td>
+      <td>{r.get('avg_weight') or 'N/A'}</td>
+      <td><a href="exercise_detail.py?exercise_id={r.get('exercise_id')}">View Details</a></td>
+    </tr>
+""")
+        print("""
+  </tbody>
+</table>
+""")
 
-    <footer>
-        <p>&copy; 2025 FitTrack Pro. All rights reserved.</p>
-    </footer>
+    print("""
+  <a href="forms/search_exercise_performance.html">Back to Search</a>
+  <br><a href="forms/search_hub.html">Search Hub</a>
+  <br><a href="maintenance.html">Maintenance</a>
 </body>
 </html>
-    """)
+""")
 
 if __name__ == "__main__":
     main()
-
