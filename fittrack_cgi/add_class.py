@@ -6,8 +6,15 @@ CGI Script to add a new fitness class
 
 import cgi
 import cgitb
-import pymysql
 import sys
+import os
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import auth_utils
+
+user = auth_utils.require_auth()
+
+import pymysql
 
 # Enable CGI error reporting
 cgitb.enable()

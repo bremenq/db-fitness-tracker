@@ -1,10 +1,14 @@
 #!/usr/bin/python3
 import cgi
-import pymysql
 import sys
 import os
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'pymysql'))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import auth_utils
+
+user = auth_utils.require_auth()
+
+import pymysql
 
 DB_CONFIG = {
     'host': 'localhost',
