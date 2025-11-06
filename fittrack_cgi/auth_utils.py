@@ -10,9 +10,9 @@ import pymysql
 
 DB_CONFIG = {
     'host': 'localhost',
-    'user': '****',
-    'password': '****',
-    'database': 'db_****',
+    'user': 'azinovev',
+    'password': 'WrtqlLcpgCPs0KGY',
+    'database': 'db_azinovev',
     'charset': 'utf8mb4'
 }
 

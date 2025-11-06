@@ -118,36 +118,43 @@
     </footer>
     
     <script>
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-            return null;
-        }
-        
         function checkLoginStatus() {
-            const session = getCookie('fittrack_session');
             const statusDiv = document.getElementById('loginStatus');
             
-            if (session) {
-                statusDiv.innerHTML = `
-                    <div style="padding: 15px; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 4px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="color: #155724; font-size: 14px;">
-                            <strong>✓ Logged in</strong> - You can now add and modify data
-                        </span>
-                        <a href="logout.py" style="padding: 8px 20px; background: #dc3545; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">Logout</a>
-                    </div>
-                `;
-            } else {
-                statusDiv.innerHTML = `
-                    <div style="padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 4px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="color: #856404; font-size: 14px;">
-                            <strong>⚠ Not logged in</strong> - Login required to add or modify data
-                        </span>
-                        <a href="login.html" style="padding: 8px 20px; background: #3498db; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">Login</a>
-                    </div>
-                `;
-            }
+            // Call server-side session checker
+            fetch('check_session.py')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.logged_in) {
+                        statusDiv.innerHTML = `
+                            <div style="padding: 15px; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 4px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: #155724; font-size: 14px;">
+                                    <strong>✓ Logged in as ${data.username}</strong> - You can now add and modify data
+                                </span>
+                                <a href="logout.py" style="padding: 8px 20px; background: #dc3545; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">Logout</a>
+                            </div>
+                        `;
+                    } else {
+                        statusDiv.innerHTML = `
+                            <div style="padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 4px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: #856404; font-size: 14px;">
+                                    <strong>⚠ Not logged in</strong> - Login required to add or modify data
+                                </span>
+                                <a href="login.html" style="padding: 8px 20px; background: #3498db; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">Login</a>
+                            </div>
+                        `;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking session:', error);
+                    statusDiv.innerHTML = `
+                        <div style="padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 4px; margin-bottom: 20px;">
+                            <span style="color: #856404; font-size: 14px;">
+                                <strong>⚠ Not logged in</strong> - Login required to add or modify data
+                            </span>
+                        </div>
+                    `;
+                });
         }
         
         checkLoginStatus();

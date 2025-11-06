@@ -125,6 +125,27 @@
             display: block;
             margin-bottom: 5px;
         }
+        
+        .password-wrapper {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #7f8c8d;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 5px;
+        }
+        
+        .toggle-password:hover {
+            color: #2c3e50;
+        }
     </style>
 </head>
 <body>
@@ -152,13 +173,18 @@
             
             <div class="form-group">
                 <label for="password">Password</label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    name="password" 
-                    required
-                    placeholder="Enter your password"
-                >
+                <div class="password-wrapper">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        required
+                        placeholder="Enter your password"
+                    >
+                    <button type="button" class="toggle-password" onclick="togglePassword()">
+                        👁️ Show
+                    </button>
+                </div>
             </div>
             
             <button type="submit" class="btn-login">Login</button>
@@ -208,6 +234,19 @@
                 errorDiv.classList.add('show');
             }
         });
+        
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleButton = document.querySelector('.toggle-password');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleButton.textContent = '👁️ Hide';
+            } else {
+                passwordInput.type = 'password';
+                toggleButton.textContent = '👁️ Show';
+            }
+        }
     </script>
 </body>
 </html>

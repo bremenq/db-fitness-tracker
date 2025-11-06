@@ -32,8 +32,10 @@ def main():
     
     session_cookie = auth_utils.create_session(user['username'], user['admin_id'])
     
+    print("Content-Type: text/html")
     print(session_cookie)
-    print("Location: maintenance.html\n")
+    print("Location: maintenance.html")
+    print()
 
 if __name__ == '__main__':
     main()

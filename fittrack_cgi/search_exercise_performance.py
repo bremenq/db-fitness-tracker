@@ -12,7 +12,7 @@ cgitb.enable()
 DB_CONFIG = {
     'host': 'localhost',
     'user': 'aharslan',         
-    'password': '****',      
+    'password': 'WrtqlLcpgCPs0KGY',      
     'database': 'db_aharslan',   
     'charset': 'utf8mb4',
     'cursorclass': pymysql.cursors.DictCursor
