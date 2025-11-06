@@ -70,8 +70,6 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 │   ├── generate_test_data.sql         # Test data generation script
 │   └── add_workouts_for_existing_users.sql  # Additional workout data
 ├── HW7/                               # Assignment 7: Security
-│   ├── SECURITY_I_GUIDE.md            # Email encryption setup guide
-│   ├── milica_publickey.asc           # TA's public key
 │   ├── security_ii_schema.sql         # Authentication database schema
 │   └── SECURITY_II_IMPLEMENTATION.md  # Authentication documentation
 ├── fittrack_schema.sql                # Assignment 2: Database schema implementation
@@ -189,18 +187,11 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 - `HW6/HW6_Search_Implementation_Plan.md` - Implementation plan ✅
 - `HW6/add_gym_members.sql` - Test data generation ✅
 
-### ✅ Assignment 7 - Security **COMPLETED**
-- **Security I:** Email encryption and digital signatures
-- **Security II:** Web service authentication and access control
+### ✅ Assignment 7 - Security II: Web Authentication **COMPLETED**
+- **Web service authentication and access control**
 - **Location:** `HW7/` directory + `fittrack_cgi/` authentication files
 
-#### Security I - Email Encryption
-- **Guide:** `HW7/SECURITY_I_GUIDE.md` - Complete setup instructions
-- **TA Public Key:** `HW7/milica_publickey.asc`
-- **Task:** Set up GPG encryption, send encrypted/signed email to TA
-- **Deadline:** 2025-nov-06 23:59
-
-#### Security II - Web Authentication ✅
+#### Implementation Details
 - **Database Schema:** `HW7/security_ii_schema.sql` - admin_user table
 - **Authentication Module:** `fittrack_cgi/auth_utils.py` - Session management
 - **Login System:** `fittrack_cgi/login.html` + `login.py` + `logout.py`
@@ -209,7 +200,7 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 - **Documentation:** `HW7/SECURITY_II_IMPLEMENTATION.md`
 - **Default Credentials:** Username: `admin`, Password: `fittrack2025`
 
-#### Implementation Details:
+#### Technical Details:
 - **Authentication:** Session-based with SHA2-256 password hashing
 - **Session Storage:** File-based in `/tmp/fittrack_sessions/`
 - **Session Duration:** 30 minutes
@@ -251,7 +242,7 @@ Based on the 3 ISA hierarchies in our database design:
 - **Assignment 4:** Website Implementation ✅ **COMPLETED**
 - **Assignment 5:** CGI Web Application ✅ **COMPLETED**
 - **Assignment 6:** Search Functionality ✅ **COMPLETED** (All 3 searches implemented)
-- **Assignment 7:** Security ✅ **COMPLETED** (Email encryption + Web authentication)
+- **Assignment 7:** Security II - Web Authentication ✅ **COMPLETED**
 
 ## Contact
 
