@@ -1,17 +1,25 @@
 #!/usr/bin/python3
-print('Content-Type: text/html; charset=utf-8')
-print()
 
 import cgi
 import sys
+import os
 from datetime import datetime
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import auth_utils
+
+user = auth_utils.require_auth()
+
+print('Content-Type: text/html; charset=utf-8')
+print()
+
 import pymysql
 
 DB_CONFIG = {
     'host': 'localhost',
-    'user': 'azinovev',
+    'user': 'your_username',
     'password': '****',
-    'database': 'db_azinovev',
+    'database': 'db_your_username',
     'charset': 'utf8mb4'
 }
 

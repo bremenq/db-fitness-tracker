@@ -6,8 +6,15 @@ CGI Script to add a new workout session
 
 import cgi
 import cgitb
-import pymysql
 import sys
+import os
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import auth_utils
+
+user = auth_utils.require_auth()
+
+import pymysql
 
 # Enable CGI error reporting
 cgitb.enable()
@@ -15,9 +22,9 @@ cgitb.enable()
 # Database configuration
 DB_CONFIG = {
     'host': 'localhost',
-    'user': 'azinovev',
+    'user': 'your_username',
     'password': '****',
-    'database': 'db_azinovev',
+    'database': 'db_your_username',
     'charset': 'utf8mb4'
 }
 

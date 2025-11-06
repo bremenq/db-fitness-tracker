@@ -69,6 +69,9 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 │   ├── HW6_Search_Implementation_Plan.md  # Search implementation plan
 │   ├── generate_test_data.sql         # Test data generation script
 │   └── add_workouts_for_existing_users.sql  # Additional workout data
+├── HW7/                               # Assignment 7: Security
+│   ├── security_ii_schema.sql         # Authentication database schema
+│   └── SECURITY_II_IMPLEMENTATION.md  # Authentication documentation
 ├── fittrack_schema.sql                # Assignment 2: Database schema implementation
 ├── FitTrack Pro - ER Diagram.pdf     # Visual ER Diagram
 └── README.md                          # This file
@@ -184,6 +187,27 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 - `HW6/HW6_Search_Implementation_Plan.md` - Implementation plan ✅
 - `HW6/add_gym_members.sql` - Test data generation ✅
 
+### ✅ Assignment 7 - Security II: Web Authentication **COMPLETED**
+- **Web service authentication and access control**
+- **Location:** `HW7/` directory + `fittrack_cgi/` authentication files
+
+#### Implementation Details
+- **Database Schema:** `HW7/security_ii_schema.sql` - admin_user table
+- **Authentication Module:** `fittrack_cgi/auth_utils.py` - Session management
+- **Login System:** `fittrack_cgi/login.html` + `login.py` + `logout.py`
+- **Protected Pages:** All 9 add_*.py scripts require authentication
+- **Public Pages:** All search_*.py scripts remain accessible
+- **Documentation:** `HW7/SECURITY_II_IMPLEMENTATION.md`
+- **Default Credentials:** Username: `admin`, Password: `fittrack2025`
+
+#### Technical Details:
+- **Authentication:** Session-based with SHA2-256 password hashing
+- **Session Storage:** File-based in `/tmp/fittrack_sessions/`
+- **Session Duration:** 30 minutes
+- **Access Control:** Write operations (INSERT/UPDATE/DELETE) protected, read operations (SELECT) public
+- **Error Handling:** 401 Unauthorized with user-friendly error pages
+- **Security Features:** HttpOnly cookies, secure tokens, SQL injection prevention
+
 ## System Features
 
 ### Core Functionality
@@ -218,6 +242,7 @@ Based on the 3 ISA hierarchies in our database design:
 - **Assignment 4:** Website Implementation ✅ **COMPLETED**
 - **Assignment 5:** CGI Web Application ✅ **COMPLETED**
 - **Assignment 6:** Search Functionality ✅ **COMPLETED** (All 3 searches implemented)
+- **Assignment 7:** Security II - Web Authentication ✅ **COMPLETED**
 
 ## Contact
 
