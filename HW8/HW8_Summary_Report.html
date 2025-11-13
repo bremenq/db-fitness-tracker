@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW8 - Web Log Analysis Summary</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        
+        body {
+            font-family: 'Courier New', 'Consolas', monospace;
+            font-size: 11pt;
+            line-height: 1.4;
+            color: #000;
+            background: white;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #333;
+        }
+        
+        .header h1 {
+            font-size: 18pt;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        
+        .header .info {
+            font-size: 10pt;
+            color: #666;
+            margin: 5px 0;
+        }
+        
+        pre {
+            font-family: 'Courier New', 'Consolas', monospace;
+            font-size: 10pt;
+            line-height: 1.3;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 5px 0;
+            border-bottom: 1px solid #999;
+        }
+        
+        .diagrams {
+            page-break-before: always;
+            text-align: center;
+        }
+        
+        .diagrams h2 {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 30px 0 20px 0;
+        }
+        
+        .diagrams img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+        
+        .diagram-caption {
+            font-family: Arial, sans-serif;
+            font-size: 10pt;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #999;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 9pt;
+            color: #666;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Assignment 8: Web Log Evaluation</h1>
+    <div class="info">FitTrack Pro - Apache Log Analysis</div>
+    <div class="info">Team: Aleksandr Zinovev, Lee Sewoo, Arslan</div>
+    <div class="info">Databases Project 2025 | Constructor University</div>
+    <div class="info">Submission Date: November 13, 2025</div>
+</div>
+
+<pre>============================================================
+FitTrack Pro - Web Log Analysis for azinovev
+============================================================
+
+========= ACCESS LOG STATISTICS =========
+
+Total Requests: 77
+Unique Pages: 17
+Unique Visitors (IPs): 2
+
+Top Pages by Access Count:
+  1. /~azinovev/maintenance.html: 21 requests
+  2. /~azinovev/login.py: 16 requests
+  3. /~azinovev/css/style.css: 9 requests
+  4. /~azinovev/img/fittrack-pro-logo.svg: 9 requests
+  5. /~azinovev/login.html: 6 requests
+  6. /~azinovev/login: 3 requests
+  7. /~azinovev/index.html: 2 requests
+  8. /~azinovev/check_session.py: 2 requests
+  9. /~azinovev/: 1 requests
+  10. /~azinovev/forms/search_hub.html: 1 requests
+
+Visitors by IP Address:
+  10.212.134.13: 74 requests
+  172.16.121.184: 3 requests
+
+Browser Distribution:
+  Firefox: 74 requests (96.1%)
+  Safari: 3 requests (3.9%)
+
+Detailed Page Access Information:
+
+Page: /~azinovev/maintenance.html
+  Accessed 21 times
+  Visitors:
+    10.212.134.13 at [06/Nov/2025:13:16:12 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:13:27:11 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:13:27:44 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:13:28:28 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:13:28:39 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:02:10 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:02:47 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:03:16 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:03:22 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:09:11 +0100] using Firefox
+    ... and 11 more
+
+Page: /~azinovev/login.py
+  Accessed 16 times
+  Visitors:
+    10.212.134.13 at [06/Nov/2025:13:27:11 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:13:27:43 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:13:28:28 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:13:28:39 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:02:10 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:02:47 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:03:16 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:03:22 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:09:33 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:12:14 +0100] using Firefox
+    ... and 6 more
+
+Page: /~azinovev/css/style.css
+  Accessed 9 times
+  Visitors:
+    10.212.134.13 at [06/Nov/2025:13:16:10 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:13:31:25 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:02:21 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:02:23 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:03:01 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:09:11 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:12:52 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:13:08 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:13:08 +0100] using Firefox
+
+Page: /~azinovev/img/fittrack-pro-logo.svg
+  Accessed 9 times
+  Visitors:
+    10.212.134.13 at [06/Nov/2025:13:16:10 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:13:31:25 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:02:21 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:02:23 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:03:01 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:09:11 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:12:52 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:13:08 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:13:09 +0100] using Firefox
+
+Page: /~azinovev/login.html
+  Accessed 6 times
+  Visitors:
+    10.212.134.13 at [06/Nov/2025:13:27:27 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:13:31:25 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:02:21 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:02:23 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:03:01 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:09:23 +0100] using Firefox
+
+Page: /~azinovev/login
+  Accessed 3 times
+  Visitors:
+    10.212.134.13 at [06/Nov/2025:13:26:53 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:15:26 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:20:02 +0100] using Firefox
+
+Page: /~azinovev/index.html
+  Accessed 2 times
+  Visitors:
+    10.212.134.13 at [06/Nov/2025:13:23:01 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:17:19:53 +0100] using Firefox
+
+Page: /~azinovev/check_session.py
+  Accessed 2 times
+  Visitors:
+    10.212.134.13 at [06/Nov/2025:17:20:05 +0100] using Firefox
+    10.212.134.13 at [06/Nov/2025:18:08:42 +0100] using Firefox
+
+Page: /~azinovev/
+  Accessed 1 times
+  Visitors:
+    10.212.134.13 at [06/Nov/2025:13:16:10 +0100] using Firefox
+
+Page: /~azinovev/forms/search_hub.html
+  Accessed 1 times
+  Visitors:
+    10.212.134.13 at [06/Nov/2025:13:23:00 +0100] using Firefox
+
+Page: /~azinovev/forms/add_gym.html
+  Accessed 1 times
+  Visitors:
+    10.212.134.13 at [06/Nov/2025:13:28:29 +0100] using Firefox
+
+Page: /~azinovev/test_login.py
+  Accessed 1 times
+  Visitors:
+    10.212.134.13 at [06/Nov/2025:17:14:09 +0100] using Firefox
+
+Page: /~azinovev/forms/add_user.html
+  Accessed 1 times
+  Visitors:
+    10.212.134.13 at [06/Nov/2025:17:20:08 +0100] using Firefox
+
+Page: /~azinovev/add_user.py
+  Accessed 1 times
+  Visitors:
+    10.212.134.13 at [06/Nov/2025:17:20:43 +0100] using Firefox
+
+Page: /~azinovev//
+  Accessed 1 times
+  Visitors:
+    172.16.121.184 at [12/Nov/2025:18:08:55 +0100] using Safari
+
+Page: /~azinovev//css/style.css
+  Accessed 1 times
+  Visitors:
+    172.16.121.184 at [12/Nov/2025:18:08:55 +0100] using Safari
+
+Page: /~azinovev//img/fittrack-pro-logo.svg
+  Accessed 1 times
+  Visitors:
+    172.16.121.184 at [12/Nov/2025:18:08:55 +0100] using Safari
+
+
+========= ERROR LOG STATISTICS =========
+
+Total Errors: 0
+Unique Error Types: 0
+IPs Triggering Errors: 0
+
+</pre>
+
+<!-- Timeline Diagrams -->
+<div class="diagrams">
+    <h2>Timeline Diagrams</h2>
+    
+    <div style="margin: 40px 0;">
+        <img src="access_timeline.png" alt="Access Timeline">
+        <p class="diagram-caption">Figure 1: Access Timeline - Hourly request distribution (Nov 1-12, 2025)</p>
+    </div>
+    
+    <div style="margin: 40px 0;">
+        <img src="browser_distribution.png" alt="Browser Distribution">
+        <p class="diagram-caption">Figure 2: Browser Distribution - Firefox 96.1%, Safari 3.9%</p>
+    </div>
+</div>
+
+<div class="footer">
+    <p><strong>Assignment 8: Web Log Evaluation</strong></p>
+    <p>Analysis Script: HW8/analyze_logs.py | Analysis Period: November 1-12, 2025</p>
+    <p>Repository: github.com/bremenq/db-fitness-tracker</p>
+    <p style="margin-top: 10px;">Constructor University | Databases Project 2025</p>
+</div>
+
+</body>
+</html>
+
