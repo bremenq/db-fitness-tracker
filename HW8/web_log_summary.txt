@@ -1,0 +1,79 @@
+============================================================
+FitTrack Pro - Web Log Analysis for azinovev
+============================================================
+
+========= ACCESS LOG STATISTICS =========
+
+Total Requests: 7
+Unique Pages: 5
+Unique Visitors (IPs): 3
+
+Top Pages by Access Count:
+  1. /~azinovev/index.html: 3 requests
+  2. /~azinovev/imprint.html: 1 requests
+  3. /cgi-bin/azinovev/maintenance.html: 1 requests
+  4. /cgi-bin/azinovev/search_user_activity.py: 1 requests
+  5. /cgi-bin/azinovev/login.html: 1 requests
+
+Visitors by IP Address:
+  192.168.0.2: 3 requests
+  10.0.0.5: 3 requests
+  172.16.0.10: 1 requests
+
+Browser Distribution:
+  Chrome: 4 requests (57.1%)
+  Safari: 2 requests (28.6%)
+  Firefox: 1 requests (14.3%)
+
+Detailed Page Access Information:
+
+Page: /~azinovev/index.html
+  Accessed 3 times
+  Visitors:
+    192.168.0.2 at [12/Nov/2025:09:30:15 +0000] using Chrome
+    10.0.0.5 at [12/Nov/2025:10:15:23 +0000] using Firefox
+    192.168.0.2 at [12/Nov/2025:12:00:00 +0000] using Chrome
+
+Page: /~azinovev/imprint.html
+  Accessed 1 times
+  Visitors:
+    192.168.0.2 at [12/Nov/2025:10:45:00 +0000] using Chrome
+
+Page: /cgi-bin/azinovev/maintenance.html
+  Accessed 1 times
+  Visitors:
+    10.0.0.5 at [12/Nov/2025:11:05:02 +0000] using Safari
+
+Page: /cgi-bin/azinovev/search_user_activity.py
+  Accessed 1 times
+  Visitors:
+    172.16.0.10 at [12/Nov/2025:11:30:45 +0000] using Chrome
+
+Page: /cgi-bin/azinovev/login.html
+  Accessed 1 times
+  Visitors:
+    10.0.0.5 at [12/Nov/2025:13:15:30 +0000] using Safari
+
+
+========= ERROR LOG STATISTICS =========
+
+Total Errors: 3
+Unique Error Types: 2
+IPs Triggering Errors: 3
+
+Errors by Type:
+  core:error: 2 errors (66.7%)
+  authz_core:error: 1 errors (33.3%)
+
+IPs Causing Errors:
+  192.168.0.2: 1 errors
+  10.0.0.5: 1 errors
+  172.16.0.10: 1 errors
+
+Detailed Error Information:
+  [Wed Nov 12 11:12:02.123456 2025] [core:error] 192.168.0.2
+    File does not exist: /home/azinovev/public_html/missing.html
+  [Wed Nov 12 11:22:10.654321 2025] [core:error] 10.0.0.5
+    AH00123: Internal Server Error: /cgi-bin/azinovev/broken_script.py
+  [Wed Nov 12 14:30:15.789012 2025] [authz_core:error] 172.16.0.10
+    AH01630: client denied by server configuration: /cgi-bin/azinovev/admin.py
