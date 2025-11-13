@@ -72,6 +72,15 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 ├── HW7/                               # Assignment 7: Security
 │   ├── security_ii_schema.sql         # Authentication database schema
 │   └── SECURITY_II_IMPLEMENTATION.md  # Authentication documentation
+├── HW8/                               # Assignment 8: Web Log Evaluation
+│   ├── analyze_logs.py                # Apache log analysis script
+│   ├── web_log_summary.txt            # Text statistics output
+│   ├── access_timeline.png            # Access timeline diagram
+│   ├── browser_distribution.png       # Browser distribution chart
+│   ├── HW8 - Web Log Analysis Report.pdf        # Comprehensive PDF report
+│   ├── HW8 - Web Log Analysis Summary.pdf       # Summary PDF report
+│   ├── HW8_Web_Log_Analysis_Report.html         # HTML source (comprehensive)
+│   └── HW8_Summary_Report.html                  # HTML source (summary)
 ├── fittrack_schema.sql                # Assignment 2: Database schema implementation
 ├── FitTrack Pro - ER Diagram.pdf     # Visual ER Diagram
 └── README.md                          # This file
@@ -208,6 +217,46 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 - **Error Handling:** 401 Unauthorized with user-friendly error pages
 - **Security Features:** HttpOnly cookies, secure tokens, SQL injection prevention
 
+### ✅ Assignment 8 - Web Log Evaluation **COMPLETED**
+- **Apache log analysis with statistics and timeline diagrams**
+- **Location:** `HW8/` directory
+- **Analysis Period:** November 1-12, 2025
+
+#### Implementation Details
+- **Analysis Script:** `HW8/analyze_logs.py` - Python script with matplotlib
+- **Technology Stack:** Python 3.6, matplotlib, regex for log parsing
+- **Data Source:** Real Apache logs from ClamV server (`/var/log/apache2/`)
+- **Reports:** 
+  - Comprehensive PDF report (9 sections with detailed analysis)
+  - Summary PDF report (text-based with diagrams)
+- **Diagrams:**
+  - Access timeline (hourly request distribution)
+  - Browser distribution pie chart
+
+#### Key Findings:
+- **Total Requests:** 77 page requests analyzed
+- **Unique Visitors:** 2 IPs (internal university network)
+- **Analysis Period:** November 1-12, 2025 (12 days)
+- **Error Rate:** 0% - Zero errors found (clean deployment!)
+- **Browser Distribution:** Firefox 96.1%, Safari 3.9%
+- **Most Popular Page:** maintenance.html (21 requests, 27.3%)
+- **Peak Activity:** November 6, 2025 (13:00-18:00)
+
+#### Technical Features:
+- **User-Specific Filtering:** Only analyzes pages for `/~azinovev/` and `/cgi-bin/azinovev/`
+- **Timeline Visualization:** Hourly request aggregation with matplotlib
+- **Browser Detection:** Automatic user agent parsing and categorization
+- **Error Analysis:** Comprehensive error log parsing (zero errors found)
+- **Statistics Generation:** Detailed text reports with page rankings and visitor analysis
+
+#### Files:
+- `analyze_logs.py` - Enhanced Python analysis script ✅
+- `web_log_summary.txt` - Complete text statistics ✅
+- `access_timeline.png` - Timeline diagram ✅
+- `browser_distribution.png` - Browser pie chart ✅
+- `HW8 - Web Log Analysis Report.pdf` - Comprehensive report (9 sections) ✅
+- `HW8 - Web Log Analysis Summary.pdf` - Summary report with diagrams ✅
+
 ## System Features
 
 ### Core Functionality
@@ -243,6 +292,7 @@ Based on the 3 ISA hierarchies in our database design:
 - **Assignment 5:** CGI Web Application ✅ **COMPLETED**
 - **Assignment 6:** Search Functionality ✅ **COMPLETED** (All 3 searches implemented)
 - **Assignment 7:** Security II - Web Authentication ✅ **COMPLETED**
+- **Assignment 8:** Web Log Evaluation ✅ **COMPLETED** (77 requests, 0 errors)
 
 ## Contact
 
