@@ -34,8 +34,8 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 │       ├── fittrack-pro-logo.svg     # Brand logo
 │       ├── logo-demo.html            # Logo demonstration
 │       └── color-palette.html        # Color palette visualization
-├── fittrack_cgi/                      # Assignments 5 & 6: CGI Web Application
-│   ├── *.py                           # Python CGI scripts (12 total)
+├── fittrack_cgi/                      # Assignments 5, 6, 7, 9: CGI Web Application
+│   ├── *.py                           # Python CGI scripts (13 total)
 │   │   ├── add_user.py               # HW5: User insertion script
 │   │   ├── add_gym.py                # HW5: Gym insertion script
 │   │   ├── add_workout.py            # HW5: Workout insertion script
@@ -46,6 +46,7 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 │   │   ├── add_class_booking.py      # HW5: Class booking script
 │   │   ├── add_gym_member.py         # HW5: Gym member script
 │   │   ├── get_data.py               # HW5: AJAX data provider
+│   │   ├── autocomplete.py           # HW9: Dynamic autocomplete API
 │   │   ├── search_user_activity.py   # HW6: User activity search (Aleksandr)
 │   │   ├── user_detail.py            # HW6: User detail page (Aleksandr)
 │   │   ├── search_gym_members.py     # HW6: Gym member search (Lee)
@@ -53,7 +54,7 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 │   │   ├── search_exercise_performance.py  # HW6: Exercise search (Arslan)
 │   │   └── exercise_detail.py        # HW6: Exercise detail page (Arslan)
 │   ├── forms/                         # HTML forms (13 total)
-│   │   ├── add_*.html                # HW5: 9 data entry forms
+│   │   ├── add_*.html                # HW5/HW9: 9 data entry forms (with autocomplete)
 │   │   ├── search_hub.html           # HW6: Search landing page
 │   │   ├── search_user_activity.html # HW6: User activity search (Aleksandr)
 │   │   ├── search_gym_members.html   # HW6: Gym member search (Lee)
@@ -81,6 +82,14 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 │   ├── HW8 - Web Log Analysis Summary.pdf       # Summary PDF report
 │   ├── HW8_Web_Log_Analysis_Report.html         # HTML source (comprehensive)
 │   └── HW8_Summary_Report.html                  # HTML source (summary)
+├── HW9/                               # Assignment 9: jQuery UI Autocomplete
+│   ├── add_workout.html               # Autocomplete for user selection (Aleksandr)
+│   ├── add_class.html                 # Autocomplete for gym selection (Aleksandr)
+│   ├── add_workout_exercise.html      # Autocomplete for workout/exercise (Siwoo)
+│   ├── add_gym_member.html            # Autocomplete for user/gym (Arslan)
+│   ├── add_class_booking.html         # Autocomplete for user/class (Arslan)
+│   ├── add_progress.html              # Autocomplete for user selection (Siwoo)
+│   └── autocomplete.py                # Backend API for dynamic search
 ├── fittrack_schema.sql                # Assignment 2: Database schema implementation
 ├── FitTrack Pro - ER Diagram.pdf     # Visual ER Diagram
 └── README.md                          # This file
@@ -153,11 +162,13 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
   - All 9 forms insert data into database
   - Dynamic feedback pages
   - AJAX data loading for dropdowns
+  - jQuery UI autocomplete for foreign key selections (HW9)
   - Deployed on ClamV server
 - **Files:**
-  - `*.py` - 9 executable Python CGI scripts (in root directory)
-  - `forms/` - 9 HTML forms with database integration
+  - `*.py` - 13 executable Python CGI scripts (in root directory)
+  - `forms/` - 9 HTML forms with database integration and autocomplete
   - `get_data.py` - AJAX endpoint for dynamic dropdowns
+  - `autocomplete.py` - Dynamic autocomplete API (HW9)
   - `README.md` - CGI implementation documentation
   - `DEPLOYMENT_INSTRUCTIONS.md` - Complete deployment guide
 
@@ -257,6 +268,49 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 - `HW8 - Web Log Analysis Report.pdf` - Comprehensive report (9 sections) ✅
 - `HW8 - Web Log Analysis Summary.pdf` - Summary report with diagrams ✅
 
+### ✅ Assignment 9 - jQuery UI Autocomplete **COMPLETED**
+- **Dynamic search with server-side autocomplete (bonus feature included)**
+- **Location:** `HW9/` directory + `fittrack_cgi/` updated forms
+- **Technology Stack:** jQuery UI + Python CGI + AJAX + JSON
+
+#### Implementation Details
+- **Backend API:** `autocomplete.py` - Dynamic server-side search endpoint
+- **Frontend:** jQuery UI autocomplete replacing all dropdown `<select>` elements
+- **Search Types:** Users, Gyms, Exercises, Workouts, Classes
+- **Features:**
+  - Real-time search on each keystroke (minLength: 2)
+  - SQL `LIKE` queries for partial matching
+  - JSON responses with id, value, and label
+  - Limit 10 results per search
+  - Hidden field pattern for form submission
+- **Forms Updated:**
+  - All 6 forms with foreign key selections
+  - Corporate Design CSS maintained
+  - Fully integrated with existing form handlers
+
+#### Work Distribution:
+- **Aleksandr Zinovev:** Backend API (autocomplete.py) + User/Gym forms ✅
+- **Siwoo Lee:** Workout/Exercise forms + Progress form ✅
+- **Arslan Ahmet Berk:** Gym Member + Class Booking forms ✅
+
+#### Technical Features:
+- **Backend:** Python CGI with PyMySQL, SQL LIKE queries
+- **Frontend:** jQuery UI 1.13.2, AJAX requests
+- **Response Format:** `[{"id": 1, "value": "Name", "label": "Name (Details)"}]`
+- **Search Fields:** Multiple fields per entity (name, email, address, etc.)
+- **Performance:** Results limited to 10, indexed database queries
+
+#### Files:
+- `HW9/autocomplete.py` - Backend API for all search types ✅
+- `HW9/add_workout.html` - User autocomplete (Aleksandr) ✅
+- `HW9/add_class.html` - Gym autocomplete (Aleksandr) ✅
+- `HW9/add_workout_exercise.html` - Workout/Exercise autocomplete (Siwoo) ✅
+- `HW9/add_progress.html` - User autocomplete (Siwoo) ✅
+- `HW9/add_gym_member.html` - User/Gym autocomplete (Arslan) ✅
+- `HW9/add_class_booking.html` - User/Class autocomplete (Arslan) ✅
+- `fittrack_cgi/autocomplete.py` - Deployed backend API ✅
+- `fittrack_cgi/forms/add_*.html` - All forms updated with autocomplete ✅
+
 ## System Features
 
 ### Core Functionality
@@ -293,6 +347,7 @@ Based on the 3 ISA hierarchies in our database design:
 - **Assignment 6:** Search Functionality ✅ **COMPLETED** (All 3 searches implemented)
 - **Assignment 7:** Security II - Web Authentication ✅ **COMPLETED**
 - **Assignment 8:** Web Log Evaluation ✅ **COMPLETED** (77 requests, 0 errors)
+- **Assignment 9:** jQuery UI Autocomplete ✅ **COMPLETED** (Bonus feature included)
 
 ## Contact
 
