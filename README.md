@@ -54,7 +54,15 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 │   │   ├── search_exercise_performance.py  # HW6: Exercise search (Arslan)
 │   │   └── exercise_detail.py        # HW6: Exercise detail page (Arslan)
 │   ├── forms/                         # HTML forms (13 total)
-│   │   ├── add_*.html                # HW5/HW9: 9 data entry forms (with autocomplete)
+│   │   ├── add_user.html             # HW5: User form (no autocomplete)
+│   │   ├── add_gym.html              # HW5: Gym form (no autocomplete)
+│   │   ├── add_exercise.html         # HW5: Exercise form (no autocomplete)
+│   │   ├── add_workout.html          # HW5+HW9: Workout with user autocomplete
+│   │   ├── add_class.html            # HW5+HW9: Class with gym autocomplete
+│   │   ├── add_progress.html         # HW5+HW9: Progress with user autocomplete
+│   │   ├── add_workout_exercise.html # HW5+HW9: Link with workout/exercise autocomplete
+│   │   ├── add_class_booking.html    # HW5+HW9: Booking with user/class autocomplete
+│   │   ├── add_gym_member.html       # HW5+HW9: Member with user/gym autocomplete
 │   │   ├── search_hub.html           # HW6: Search landing page
 │   │   ├── search_user_activity.html # HW6: User activity search (Aleksandr)
 │   │   ├── search_gym_members.html   # HW6: Gym member search (Lee)
