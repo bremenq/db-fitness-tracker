@@ -9,9 +9,9 @@ import sys
 
 DB_CONFIG = {
     'host': 'localhost',
-    'user': 'azinovev',
-    'password': 'WrtqlLcpgCPs0KGY',
-    'database': 'db_azinovev',
+    'user': 'your_username',
+    'password': '****',
+    'database': 'db_your_username',
     'charset': 'utf8mb4'
 }
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Security II Deployment Script
 
-PASSWORD='Kyvk4L0G0BSQ'
+PASSWORD='****'
 
 echo "=== Deploying Security II to ClamV Server ==="
 
@@ -23,7 +23,7 @@ sshpass -p "$PASSWORD" ssh azinovev@clamv.constructor.university \
 # Create database table
 echo "4. Creating admin_user table..."
 sshpass -p "$PASSWORD" ssh azinovev@clamv.constructor.university \
-    "mysql -u azinovev -p'WrtqlLcpgCPs0KGY' db_azinovev -e \"
+    "mysql -u your_username -p'****' db_your_username -e \"
 CREATE TABLE IF NOT EXISTS admin_user (
     admin_id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) UNIQUE NOT NULL,
