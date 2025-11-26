@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FitTrack Pro — Your Location</title>
+
+
+<!-- FitTrack Pro default css  assuming style.css is also under css folder, if not adjust correct directory-->
+<link rel="stylesheet" href="/css/style.css" />
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="" crossorigin="" />
+<!-- Map specific styles -->
+<link rel="stylesheet" href="/css/map-styles.css" />
+
+
+<style>
+
+body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; background:#f7fafc; color:#111827 }
+.container { max-width:1100px; margin:20px auto; padding:16px }
+</style>
+</head>
+<body>
+
+<div class="container">
+<header>
+<h1 class="site-title">FitTrack Pro</h1>
+<p class="lead">Detecting your client IP and showing your approximate location on a map.</p>
+</header>
+
+
+<main>
+<section class="map-card">
+<div class="map-header">
+<h2>Your Location</h2>
+<button id="retryBtn" class="btn btn-sm" aria-label="Retry lookup">Retry</button>
+</div>
+
+
+<!-- Loading / Error / Map containers -->
+<div id="map-status" class="map-status">
+<div id="spinner" class="spinner" aria-hidden="true"></div>
+<div id="statusText" class="status-text">Initializing...</div>
+<div id="errorMsg" class="error-msg" role="alert" hidden></div>
+</div>
+
+
+<div id="mapWrap" class="map-wrap">
+<div id="map" class="map" role="application" aria-label="Map showing client location"></div>
+</div>
+
+
+<noscript>
+<p>Please enable JavaScript to view your location map.</p>
+</noscript>
+</section>
+
+
+<section class="details">
+<h3>Debug / Info</h3>
+<dl>
+<dt>Detected IP</dt><dd id="detectedIp">—</dd>
+<dt>Coordinates</dt><dd id="detectedCoords">—</dd>
+<dt>Geo Provider</dt><dd id="geoProvider">ipinfo.io</dd>
+</dl>
+</section>
+</main>
+
+
+<footer>
+<small>Map tiles © OpenStreetMap contributors. Built with Leaflet.</small>
+</footer>
+</div>
+
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="" crossorigin=""></script>
+<!-- Map functionality -->
+<script src="/js/map-functionality.js"></script>
+</body>
+</html>
