@@ -18,6 +18,8 @@
                     <li><a href="#features">Features</a></li>
                     <li><a href="maintenance.html">Maintenance</a></li>
                     <li><a href="forms/search_hub.html">Search</a></li>
+                    <!-- New navigation item for location -->
+                    <li><a href="forms/location_map.html">Your Location</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="imprint.html">Imprint</a></li>
                 </ul>
@@ -109,6 +111,37 @@
                     <li>Comprehensive relationship modeling (1:N and M:N)</li>
                     <li>Role-based access control for different user types</li>
                 </ul>
+            </div>
+        </section>
+
+        <section id="user-location" class="location">
+            <div class="container">
+                <h2 class="section-title">Your Location</h2>
+                <p class="hero-subtitle">See where you’re connecting from and explore the map.</p>
+
+                <div class="location-layout">
+                    <div class="location-widget">
+                        <iframe
+                            src="forms/location_widget.html"
+                            width="400"
+                            height="300"
+                            style="border:0;"
+                            title="Location Widget">
+                        </iframe>
+                    </div>
+                    <div class="location-info">
+                        <p>
+                            This widget uses your IP address to estimate your location and display it on an
+                            interactive map powered by OpenStreetMap and Leaflet.
+                        </p>
+                        <p>
+                            For more details and a larger view, open the full-screen map.
+                        </p>
+                        <a href="forms/location_map.html" class="btn-primary">
+                            View Full Map
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
