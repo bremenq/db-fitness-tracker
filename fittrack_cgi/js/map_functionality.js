@@ -60,6 +60,37 @@ throw err;
 }
 
 
+async function fetchAndDisplayLocation() {
+    try {
+        showSpinner(true, 'Detecting your IP address...');
+        const clientInfo = await safeFetch(ENDPOINT_CLIENT).then(res => res.json());
+
+        ipAddress = clientInfo.ip;
+        if (!ipAddress || !IP_VALIDATE.test(ipAddress)) {
+            throw new Error('Could not validate IP address from server.');
+        }
+        detectedIpEl.textContent = ipAddress;
+        geoProviderEl.textContent = GEO_PROVIDER;
+
+        showSpinner(true, 'Fetching geolocation data...');
+        const geoInfo = await safeFetch(`${ENDPOINT_GEO}?ip=${ipAddress}`).then(res => res.json());
+
+        if (geoInfo.error) {
+            throw new Error(`Geolocation API error: ${geoInfo.error}`);
+        }
+
+        const coords = geoInfo.loc ? { lat: parseFloat(geoInfo.loc.split(',')[0]), lng: parseFloat(geoInfo.loc.split(',')[1]) } : DEFAULT_COORDS;
+        initMap(coords);
+
+    } catch (err) {
+        showError(`Failed to load map: ${err.message}. Using default location.`);
+        initMap(DEFAULT_COORDS); // Fallback
+    } finally {
+        showSpinner(false);
+    }
+}
+
+
 function initMap(coords) {
 // create map one time
 if (!map) {
@@ -95,6 +126,12 @@ setTimeout(() => marker.openPopup(), 500);
 
 detectedCoordsEl.textContent = `${coords.lat.toFixed(5)}, ${coords.lng.toFixed(5)}`;
 }
+
+// Initial load
+document.addEventListener('DOMContentLoaded', fetchAndDisplayLocation);
+
+// Retry button
+retryBtn.addEventListener('click', fetchAndDisplayLocation);
 
 
 })();
