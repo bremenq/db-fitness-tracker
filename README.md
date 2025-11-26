@@ -47,6 +47,8 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 │   │   ├── add_gym_member.py         # HW5: Gym member script
 │   │   ├── get_data.py               # HW5: AJAX data provider
 │   │   ├── autocomplete.py           # HW9: Dynamic autocomplete API
+│   │   ├── get_client_info.py        # HW10: Client IP detection API
+│   │   ├── geolocation.py            # HW10: IP geolocation lookup API
 │   │   ├── search_user_activity.py   # HW6: User activity search (Aleksandr)
 │   │   ├── user_detail.py            # HW6: User detail page (Aleksandr)
 │   │   ├── search_gym_members.py     # HW6: Gym member search (Lee)
@@ -67,9 +69,14 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 │   │   ├── search_user_activity.html # HW6: User activity search (Aleksandr)
 │   │   ├── search_gym_members.html   # HW6: Gym member search (Lee)
 │   │   └── search_exercise_performance.html  # HW6: Exercise search (Arslan)
+│   │   ├── location_map.html         # HW10: Full-page geolocation map
+│   │   └── location_widget.html      # HW10: Embeddable map widget
 │   ├── css/                           # Corporate Design CSS
+│   │   └── map-styles.css            # HW10: Custom styles for map
+│   ├── js/                            # JavaScript modules
+│   │   └── map_functionality.js      # HW10: Leaflet map implementation
 │   ├── img/                           # Brand assets
-│   ├── index.html                     # Homepage
+│   ├── index.html                     # Homepage (updated for HW10)
 │   ├── maintenance.html               # Data management hub
 │   ├── imprint.html                   # Legal page
 │   ├── README.md                      # CGI implementation documentation
@@ -98,6 +105,8 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 │   ├── add_class_booking.html         # Autocomplete for user/class (Arslan)
 │   ├── add_progress.html              # Autocomplete for user selection (Siwoo)
 │   └── autocomplete.py                # Backend API for dynamic search
+├── HW10/                              # Assignment 10: Linked Services
+│   └── HW10_IP_Geolocation_Implementation_Plan.md # Implementation plan
 ├── fittrack_schema.sql                # Assignment 2: Database schema implementation
 ├── FitTrack Pro - ER Diagram.pdf     # Visual ER Diagram
 └── README.md                          # This file
@@ -319,6 +328,41 @@ FitTrack Pro is a comprehensive fitness tracker and gym management system that c
 - `fittrack_cgi/autocomplete.py` - Deployed backend API ✅
 - `fittrack_cgi/forms/add_*.html` - All forms updated with autocomplete ✅
 
+### ✅ Assignment 10 - Linked Services: IP Geolocation **COMPLETED**
+- **IP-based geolocation with interactive map display**
+- **Location:** `HW10/` directory + `fittrack_cgi/` new files
+- **Technology Stack:** Leaflet.js + OpenStreetMap + ipinfo.io API
+
+#### Implementation Details
+- **Backend APIs:**
+  - `get_client_info.py` - Extracts client IP from HTTP headers
+  - `geolocation.py` - Fetches coordinates from ipinfo.io API
+- **Frontend Map:**
+  - `location_map.html` - Full-page interactive map
+  - `location_widget.html` - Embeddable map widget on the homepage
+  - `map_functionality.js` - Dynamic map logic with AJAX
+- **Features:**
+  - Real-time IP detection and geolocation
+  - Interactive map centered on user's location
+  - Marker with IP address popup
+  - Fallback to default coordinates (Constructor University) for local/private IPs
+  - Responsive design for mobile and desktop
+
+#### Work Distribution:
+- **Aleksandr Zinovev:** Backend APIs (`get_client_info.py`, `geolocation.py`) ✅
+- **Siwoo Lee:** Frontend map page and JavaScript logic (`location_map.html`, `map_functionality.js`) ✅
+- **Arslan Ahmet Berk:** Landing page integration and testing (`index.html`, `location_widget.html`) ✅
+
+#### Files:
+- `HW10/HW10_IP_Geolocation_Implementation_Plan.md` - Implementation plan ✅
+- `fittrack_cgi/get_client_info.py` - IP detection API ✅
+- `fittrack_cgi/geolocation.py` - Geolocation API ✅
+- `fittrack_cgi/forms/location_map.html` - Full map page ✅
+- `fittrack_cgi/forms/location_widget.html` - Embeddable widget ✅
+- `fittrack_cgi/js/map_functionality.js` - Map JavaScript logic ✅
+- `fittrack_cgi/css/map-styles.css` - Custom map styles ✅
+- `fittrack_cgi/index.html` - Homepage updated with map widget ✅
+
 ## System Features
 
 ### Core Functionality
@@ -356,6 +400,7 @@ Based on the 3 ISA hierarchies in our database design:
 - **Assignment 7:** Security II - Web Authentication ✅ **COMPLETED**
 - **Assignment 8:** Web Log Evaluation ✅ **COMPLETED** (77 requests, 0 errors)
 - **Assignment 9:** jQuery UI Autocomplete ✅ **COMPLETED** (Bonus feature included)
+- **Assignment 10:** Linked Services - IP Geolocation ✅ **COMPLETED**
 
 ## Contact
 
