@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Location Widget – FitTrack Pro</title>
+
+    <!-- Leaflet core styles and script -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Project-specific styles / JS -->
+    <link rel="stylesheet" href="../css/map-styles.css">
+    <script src="../js/map-functionality.js" defer></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+        .location-widget-container {
+            width: 100%;
+        }
+        #mini-map {
+            width: 100%;
+            height: 300px;
+        }
+        .location-widget-info {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.9rem;
+        }
+        .location-widget-info p {
+            margin: 0.25rem 0;
+        }
+        .location-widget-info .btn-primary {
+            display: inline-block;
+            margin-top: 0.5rem;
+            text-decoration: none;
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="location-widget-container">
+        <div id="mini-map"></div>
+
+        <div class="location-widget-info">
+            <p id="location-text">Detecting your location…</p>
+            <a href="location_map.html" target="_parent" class="btn-primary">
+                View Full Map
+            </a>
+            <noscript>
+                <p>JavaScript is disabled, so the map cannot be displayed.</p>
+            </noscript>
+        </div>
+    </div>
+</body>
+</html>
